@@ -49,7 +49,7 @@ function Header() {
       </div>
       {/*메뉴 리스트*/}
       <ul className="headerMenuList">
-        <li>로그인</li>
+        <li id="login_text">로그인</li>
         <li>회원가입</li>
       </ul>
     </Header_box>

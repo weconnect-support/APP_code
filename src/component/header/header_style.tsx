@@ -18,7 +18,7 @@ const Headerbox = styled.div<{ userToggled: boolean; windowWidth: number }>`
   }
 
   li {
-    padding: 0.5rem 1rem;
+    padding: 0 1rem 0 1rem;
   }
 
   .loGo {
@@ -60,12 +60,18 @@ const Headerbox = styled.div<{ userToggled: boolean; windowWidth: number }>`
     border: none;
     outline: 0;
   }
+
   .alarmBell {
     padding: 0 2rem 0 0;
   }
   .user {
     padding: 0 1rem 0 0;
   }
+
+  #login_text {
+    border-right: 2px solid black;
+  }
+
   @media screen and (max-width: 768px) {
     flex-wrap: wrap;
 
