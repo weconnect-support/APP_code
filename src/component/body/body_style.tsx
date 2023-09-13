@@ -24,7 +24,7 @@ const Body_Main = styled.div`
     border-radius: 10px;
     margin: 0 auto;
     height: 10rem;
-    width: 80%;
+    width: 95%;
     background-color: #bdbdbd;
   }
   .searchCategory h5 {
@@ -32,7 +32,7 @@ const Body_Main = styled.div`
   }
   #categoryImg {
     height: 80%;
-    width: 7rem;
+    width: 20%;
     margin: 0 0 0 1rem;
     background-color: black;
   }
