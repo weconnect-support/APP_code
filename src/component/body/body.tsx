@@ -1,7 +1,14 @@
 import { Body_Main } from "./body_style";
-import MessageCard from "./body_component/messagecard";
+import MessageCard from "./body_component/findcard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleArrowRight,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
+import FindLocationCard from "./body_component/locationcard";
+//import NaverLogin from "./../login/loginnaver";
+import NaverLogin from "./../login/naverLogin";
+
 function Body() {
   return (
     <Body_Main>
@@ -38,6 +45,34 @@ function Body() {
           icon={faCircleArrowRight}
         ></FontAwesomeIcon>
       </div>
+      <div className="findLocationList">
+        <div>
+          <p>위치 기발 봉사활동 찾기</p>
+          <div className="currentLocation">
+            <p>현재위치</p>
+            <p>강서구 화곡동</p>
+          </div>
+        </div>
+        <p>전체보기 +</p>
+      </div>
+      <div className="findLocationList">
+        <FindLocationCard />
+        <FindLocationCard />
+        <FindLocationCard />
+        <FindLocationCard />
+        <FindLocationCard />
+      </div>
+      <div className="findOtherLocation">
+        <FontAwesomeIcon
+          style={{
+            color: "#6E6E6E",
+            fontSize: "2rem",
+          }}
+          icon={faSearch}
+        ></FontAwesomeIcon>{" "}
+        <p>타 지역 봉사활동 찾기</p>
+      </div>
+      <NaverLogin />
     </Body_Main>
   );
 }

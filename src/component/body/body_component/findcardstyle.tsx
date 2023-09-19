@@ -8,6 +8,7 @@ const Card = styled.div`
   padding: 0.5rem;
   border-radius: 1rem;
   margin: 1rem;
+  box-shadow: 0 5px 1rem 0 gray;
   li {
     list-style-type: none;
     margin: 0 0 10px 0;
@@ -23,7 +24,7 @@ const Card = styled.div`
     border-radius: 1rem;
   }
   .icon {
-    font-size: 25px;
+    font-size: 1.5rem;
     margin: 0 0 0 -10px;
   }
   #date {
