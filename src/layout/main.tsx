@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../component/header/header";
-import Body from "./../component/body/body";
+import Main_Body from "../component/body/mainbody";
 
 import styled from "styled-components";
 import Footer from "../component/footer/footer";
@@ -18,10 +18,9 @@ function Main() {
       }}
     >
       <Header />
-      <Body />
+      <Main_Body />
       <Footer />
     </div>
   );
 }
-
 export default Main;

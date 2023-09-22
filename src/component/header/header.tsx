@@ -9,11 +9,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
-  const [userToggled, setUserToggled] = useState(false);
+  const [usertoggled, setUserToggled] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const userClick = () => {
-    setUserToggled(!userToggled);
+    setUserToggled(!usertoggled);
   };
   useEffect(() => {
     const handleResize = () => {
@@ -27,7 +27,7 @@ function Header() {
     };
   }, []);
   return (
-    <Header_box userToggled={userToggled} windowWidth={windowWidth}>
+    <Header_box isVisible={usertoggled} windowWidth={windowWidth}>
       {/*왼쪽 메뉴바*/}
       <div className="loGo">
         SSang
@@ -44,12 +44,14 @@ function Header() {
         <FontAwesomeIcon className="alarmBell" icon={faBell}></FontAwesomeIcon>
         <FontAwesomeIcon
           className="user"
-          icon={!userToggled ? faUser : faTimes}
+          icon={!usertoggled ? faUser : faTimes}
         ></FontAwesomeIcon>
       </div>
       {/*메뉴 리스트*/}
       <ul className="headerMenuList">
-        <li id="login_text">로그인</li>
+        <li id="login_text">
+          <a href="/login">로그인</a>{" "}
+        </li>
         <li>회원가입</li>
       </ul>
     </Header_box>

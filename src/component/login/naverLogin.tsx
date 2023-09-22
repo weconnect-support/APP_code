@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
 declare global {
   interface Window {
@@ -7,13 +6,12 @@ declare global {
   }
 }
 
-export default function NaverLogin() {
+export default function NaverLogin_Button() {
   useEffect(() => {
     initNaverLogin();
-    getData();
   }, []);
 
-  const initNaverLogin = () => {
+  function initNaverLogin() {
     const naverLogin = new window.naver.LoginWithNaverId({
       clientId: "pbsnA3r3fC8AmYvErUfW",
       callbackUrl: `http://localhost:3000/naver`,
@@ -21,23 +19,21 @@ export default function NaverLogin() {
       loginButton: {
         color: "green",
         type: 1,
-        height: 1000,
+        height: 100,
       },
       callbackHandle: true,
     });
     naverLogin.init();
-  };
-
-  const getData = () => {
-    if (window.location.href.includes("access_token")) {
-      const token = window.location.href.split("=")[1].split("&")[0];
-      console.log(token);
-    }
-  };
+  }
 
   return (
     <React.Fragment>
-      <div id="naverIdLogin"></div>
+      <div
+        id="naverIdLogin"
+        style={{
+          margin: "70px",
+        }}
+      ></div>
     </React.Fragment>
   );
 }

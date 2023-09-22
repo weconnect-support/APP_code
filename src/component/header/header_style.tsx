@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Headerbox = styled.div<{ userToggled: boolean; windowWidth: number }>`
+const Headerbox = styled.div<{ isVisible: boolean; windowWidth: number }>`
   @import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
   max-width: 100%;
   margin: 0 auto;
@@ -85,7 +85,7 @@ const Headerbox = styled.div<{ userToggled: boolean; windowWidth: number }>`
       align-items: flex-end;
       width: 30%;
       background-color: white;
-      display: ${(props) => (props.userToggled ? "flex" : "none")};
+      display: ${(props) => (props.isVisible ? "flex" : "none")};
     }
 
     .inputBar {

@@ -1,4 +1,4 @@
-import { Body_Main } from "./body_style";
+import { Body_Main } from "./mainbody_style";
 import MessageCard from "./body_component/findcard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,10 +6,9 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import FindLocationCard from "./body_component/locationcard";
-//import NaverLogin from "./../login/loginnaver";
-import NaverLogin from "./../login/naverLogin";
+import { Link, Route, Routes } from "react-router-dom";
 
-function Body() {
+function Main_Body() {
   return (
     <Body_Main>
       <div>
@@ -72,9 +71,8 @@ function Body() {
         ></FontAwesomeIcon>{" "}
         <p>타 지역 봉사활동 찾기</p>
       </div>
-      <NaverLogin />
     </Body_Main>
   );
 }
 
-export default Body;
+export default Main_Body;
