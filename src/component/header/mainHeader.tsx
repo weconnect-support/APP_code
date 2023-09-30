@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header_box from "./header_style";
+import Header_box from "./mainHeaderStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
@@ -8,7 +8,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Header() {
+function MainHeader() {
   const [usertoggled, setUserToggled] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -58,4 +58,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default MainHeader;

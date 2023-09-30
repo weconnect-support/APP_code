@@ -1,4 +1,4 @@
-import Navigation from "./footerstyle";
+import Navigation from "./footer_style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,

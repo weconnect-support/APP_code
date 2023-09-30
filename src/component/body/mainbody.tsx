@@ -18,7 +18,9 @@ function Main_Body() {
       <br />
       <div className="findPeople">
         <div>봉사자를 찾습니다.</div>
-        <div>전체보기 +</div>
+        <Link to="/List">
+          <p>전체보기 +</p>
+        </Link>
       </div>
       <div className="findCardList">
         <MessageCard />
@@ -52,7 +54,9 @@ function Main_Body() {
             <p>강서구 화곡동</p>
           </div>
         </div>
-        <p>전체보기 +</p>
+        <Link to="/List">
+          <p>전체보기 +</p>
+        </Link>
       </div>
       <div className="findLocationList">
         <FindLocationCard />

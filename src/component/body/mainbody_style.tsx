@@ -2,6 +2,11 @@ import styled from "styled-components";
 
 const Body_Main = styled.div`
   padding: 0 0 1rem 0;
+
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+
   h2 {
     margin-left: 1rem;
     font-weight: 600;

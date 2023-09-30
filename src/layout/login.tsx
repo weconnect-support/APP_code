@@ -1,4 +1,4 @@
-import Header from "../component/header/header";
+import MainHeader from "../component/header/mainHeader";
 import Footer from "./../component/footer/footer";
 import Login_Body from "./../component/body/loginbody";
 
@@ -10,7 +10,7 @@ function Login() {
         padding: "0",
       }}
     >
-      <Header />
+      <MainHeader />
       <Login_Body />
       <Footer />
     </div>
