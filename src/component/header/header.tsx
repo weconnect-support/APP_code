@@ -52,7 +52,9 @@ function Header() {
         <li id="login_text">
           <a href="/login">로그인</a>{" "}
         </li>
-        <li>회원가입</li>
+        <li id="signup_text">
+          <a href="/signup">회원가입</a>{" "}
+        </li>
       </ul>
     </Header_box>
   );

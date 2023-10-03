@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-const Body_Login = styled.div`
-    padding-bottom: 5rem;
+const Body_Signup = styled.div`
     .page{
         margin-left: 10%;
         margin-right: 10%;
-        width: flex;
         padding: 10px;
         display: flex;
         flex-direction: column;
         position: relative;
+        background-color: #f2f2f2;
+        height: 80vh;
     }
     .titleWrap{
         margin-top: 50px;
@@ -51,6 +51,7 @@ const Body_Login = styled.div`
     }
     
     .bottomButton {
+        margin-top: 26px;
         width: 100%;
         height: 48px;
         border: none;
@@ -62,7 +63,20 @@ const Body_Login = styled.div`
         cursor: pointer;
     }
 
-
+    .ant-steps-item-active > .ant-steps-item-container > .ant-steps-item-icon{
+        background-color: #FF4471;
+        border: none;
+    }
+    .ant-steps {
+        flex-direction: row;
+    }
+      
+    @media (max-width: 768px) {
+        .ant-steps-item-title{
+            display:none;
+        }
+    }
+    
 `;
 
-export { Body_Login };
+export { Body_Signup };
