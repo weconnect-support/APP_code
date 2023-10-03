@@ -1,13 +1,9 @@
 import React from "react";
-import Header from "../component/header/header";
+import MainHeader from "../component/header/mainHeader";
 import Main_Body from "../component/body/mainbody";
 
 import styled from "styled-components";
 import Footer from "../component/footer/footer";
-
-const styledBody = styled.div`
-  background-color: #bebbbb;
-`;
 
 function Main() {
   return (
@@ -17,7 +13,7 @@ function Main() {
         padding: "0",
       }}
     >
-      <Header />
+      <MainHeader />
       <Main_Body />
       <Footer />
     </div>
