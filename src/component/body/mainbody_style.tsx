@@ -13,13 +13,22 @@ const Body_Main = styled.div`
     margin: 1rem 0 1rem 1rem;
   }
 
+  .findvolunteer {
+    margin: 1rem 0 0 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .findvolunteer div {
+    margin: 0 1rem 0 1rem;
+  }
+
   .findCardList {
     display: grid !important;
     grid-template-rows: auto;
     grid-auto-flow: column;
-
     white-space: nowrap;
     overflow-x: scroll;
+    padding: 0 0 1rem 0;
   }
   .findPeople {
     display: flex;
@@ -47,7 +56,7 @@ const Body_Main = styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 1rem 1rem 0 1.5rem;
-    padding: 0.5rem 0 0.5rem 0;
+    padding: 1rem 0 1rem 0;
     overflow: auto;
     white-space: nowrap;
   }

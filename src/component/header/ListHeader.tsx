@@ -27,6 +27,9 @@ function ListHeader() {
   const goBack = () => {
     navigate(-1);
   };
+  const gologin = () => {
+    navigate("/login");
+  };
 
   return (
     <ListHeaderBox isVisible={usertoggled} windowWidth={windowWidth}>
@@ -40,7 +43,11 @@ function ListHeader() {
       {/*user 버튼*/}
       <div className="userIcon" onClick={userClick}>
         <FontAwesomeIcon className="alarmBell" icon={faBell}></FontAwesomeIcon>
-        <FontAwesomeIcon className="user" icon={faUser}></FontAwesomeIcon>
+        <FontAwesomeIcon
+          className="user"
+          onClick={gologin}
+          icon={faUser}
+        ></FontAwesomeIcon>
       </div>
     </ListHeaderBox>
   );

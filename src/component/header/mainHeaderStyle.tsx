@@ -29,6 +29,7 @@ const Headerbox = styled.div<{ isVisible: boolean; windowWidth: number }>`
     justify-content: flex-start;
     font-size: 1.5rem;
     padding: 1rem 1rem;
+    cursor: pointer;
   }
   .searchIcon {
     margin: 0 0 0 0.5rem;
@@ -66,6 +67,7 @@ const Headerbox = styled.div<{ isVisible: boolean; windowWidth: number }>`
   }
   .user {
     padding: 0 1rem 0 0;
+    cursor: pointer;
   }
 
   #login_text {

@@ -18,7 +18,7 @@ function Main_Body() {
       <br />
       <div className="findPeople">
         <div>봉사자를 찾습니다.</div>
-        <Link to="/List">
+        <Link to="/List" style={{ textDecoration: "none" }}>
           <p>전체보기 +</p>
         </Link>
       </div>
@@ -29,6 +29,21 @@ function Main_Body() {
         <MessageCard />
         <MessageCard />
       </div>
+
+      <div className="findvolunteer">
+        <div>봉사활동을 찾습니다.</div>
+        <Link to="/List" style={{ textDecoration: "none" }}>
+          <p>전체보기 +</p>
+        </Link>
+      </div>
+      <div className="findCardList">
+        <MessageCard />
+        <MessageCard />
+        <MessageCard />
+        <MessageCard />
+        <MessageCard />
+      </div>
+
       <div className="searchCategory">
         <div id="categoryImg"></div>
         <div>
@@ -54,7 +69,7 @@ function Main_Body() {
             <p>강서구 화곡동</p>
           </div>
         </div>
-        <Link to="/List">
+        <Link to="/List" style={{ textDecoration: "none" }}>
           <p>전체보기 +</p>
         </Link>
       </div>

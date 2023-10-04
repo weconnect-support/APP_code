@@ -32,6 +32,7 @@ const ListHeaderBox = styled.div<{ isVisible: boolean; windowWidth: number }>`
   }
   .user {
     padding: 0 0.5rem 0 0;
+    cursor: pointer;
   }
 
   #login_text {

@@ -7,6 +7,7 @@ import {
   faTimes,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 function MainHeader() {
   const [usertoggled, setUserToggled] = useState(false);
@@ -26,36 +27,53 @@ function MainHeader() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const navigate = useNavigate();
+  const gohome = () => {
+    navigate("/");
+  };
+  const gologin = () => {
+    navigate("/login");
+  };
+
   return (
     <Header_box isVisible={usertoggled} windowWidth={windowWidth}>
       {/*왼쪽 메뉴바*/}
-      <div className="loGo">
+      <div className="loGo" onClick={gohome}>
         SSang
-        <div className="inputBar">
-          <input id="input" />
-          <FontAwesomeIcon
-            className="searchIcon"
-            icon={faMagnifyingGlass}
-          ></FontAwesomeIcon>
-        </div>
       </div>
       {/*user 버튼*/}
       <div className="userIcon" onClick={userClick}>
         <FontAwesomeIcon className="alarmBell" icon={faBell}></FontAwesomeIcon>
         <FontAwesomeIcon
           className="user"
-          icon={!usertoggled ? faUser : faTimes}
+          icon={faUser}
+          onClick={gologin}
         ></FontAwesomeIcon>
       </div>
-      {/*메뉴 리스트*/}
-      <ul className="headerMenuList">
-        <li id="login_text">
-          <a href="/login">로그인</a>{" "}
-        </li>
-        <li>회원가입</li>
-      </ul>
     </Header_box>
   );
 }
 
 export default MainHeader;
+
+/*<ul className="headerMenuList">
+<li id="login_text">
+  <a href="/login">로그인</a>{" "}
+</li>
+<li>회원가입</li>
+</ul> 
+
+사용자 아이콘 누르면 로그인, 회원가입 나오는건데 지금 굳이 필요한가 싶어서 빼놓음
+*/
+
+/* <div className="inputBar">
+          <input id="input" />
+          <FontAwesomeIcon
+            className="searchIcon"
+            icon={faMagnifyingGlass}
+          ></FontAwesomeIcon>
+        </div>
+  
+  검색 바임 지금은 안써서 옮겨놓음
+        */
