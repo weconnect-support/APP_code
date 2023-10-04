@@ -1,4 +1,4 @@
-import Header from "../component/header/header";
+import Header from "../component/header/mainHeader";
 import Footer from "./../component/footer/footer";
 import Signup_Body from "../component/body/signupbody";
 

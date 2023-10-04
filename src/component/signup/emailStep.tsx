@@ -37,7 +37,7 @@ const EmailStep: React.FC  = () => {
           onBlur={handleBlur}
        />
      </div>
-     <Button type="default" onClick={() => prev()}>
+     <Button className='centerButton' type="default" onClick={() => prev()}>
        Back
      </Button>
      <Button className='bottomButton' type="primary" onClick={() => handleSubmit()}>

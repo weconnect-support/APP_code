@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import {Formik} from "formik";
 import {Button} from "antd";
 import MultiStepFormContext from "./MultiStepFormContext"
-
+import axios from 'axios'
 
 
 const NamePhoneStep: React.FC  = () => {
@@ -14,27 +14,36 @@ const NamePhoneStep: React.FC  = () => {
   }
   const { name, setName, phone, setPhone, prev} = contextValue;
 
-  const submitForm = () => {
+  const submitForm = async () => {
     const { email, pw, name, phone} = contextValue;
     const data = {
-      email,
-      pw,
+      email, 
+      pw, 
       name,
       phone
     };
     console.log(data);
-  
-    // fetch('YOUR_SERVER_URL', {
+    
+    var url = 'https://api-dev.weconnect.support/users/join'
+    axios.post(url, data, {headers: {"Content-Type": `application/json`}//'X-Requested-With': 'XMLHttpRequest'
+  }
+  ).then((res)=>{
+    console.log(res);
+  })
+  // .catch((err)=>console.log(err))
+  ;
+    // fetch('', {//axios
     //   method: 'POST',
     //   headers: {
     //     'Content-Type': 'application/json'
     //   },
     //   body: JSON.stringify(data)
     // })
-    // .then(response => response.json())
+    // .then(response => response.json())//then -> async 함수 밖 await 함수 내 timeout, 비동기 10초 123456으로; promise -> 성공resolve 실패reject;
+    // //
     // .then(data => console.log(data))
     // .catch((error) => {
-    //   console.error('Error:', error);
+    //   console.error('Error:', error); 
     // });
     
     //블로그
@@ -111,7 +120,7 @@ const NamePhoneStep: React.FC  = () => {
                 onBlur={handleBlur}
             />
           </div>
-          <Button type="default" onClick={() => prev()}>
+          <Button className='centerButton' type="default" onClick={() => prev()}>
             Back
           </Button>
           <Button className='bottomButton' type="primary" onClick={() => handleSubmit()}>
