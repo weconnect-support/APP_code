@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Steps } from "antd"
 import MultiStepFormContext from './MultiStepFormContext';
-
+import AddressStep from './addressStep';
 import EmailStep from './emailStep';
 import PasswordStep from './pwStep';
 import NamePhoneStep from './namephoneStep';
-// import AgreementStep from './agreementStep';
+import AgreementStep from './agreementStep';
 import { Body_Signup } from "./signup_style"
 
 const { Step } = Steps;
@@ -13,44 +13,29 @@ const { Step } = Steps;
 
 const renderStep = (step: number) => {
   switch (step){
-    // case 0:
-    //   return <AgreementStep/>;
-    // case 1:
-    //   return <EmailStep/>;
-    // case 2:
-    //   return <PasswordStep/>;
-    // case 3:
-    //   return <NamePhoneStep/>;
-
-    case 0:
-      return <EmailStep/>;
     case 1:
-      return <PasswordStep/>;
+      return <EmailStep/>;
     case 2:
+      return <PasswordStep/>;
+    case 4:
       return <NamePhoneStep/>;
+    case 3:
+      return <AddressStep/>;
+    case 0:
+      return <AgreementStep/>;
   }
 }
 
 const SignupForm = () => {
   
-  const [agreement, setAgreement] = useState("");
   const [email, setEmail] = useState("");
   const [pw, setPW] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [currentStep, setCurrentStep] = useState(0);
-
+  const [address, setAddress] = useState("");
+  const [address_detail, setAddress_Detail] = useState("");
   const next = () => {
-    if(currentStep ===3){
-      setCurrentStep(0);
-      setAgreement("");
-      setEmail("");
-      setPW("");
-      setName("");
-      setPhone("");
-      return;
-    }
-    
     setCurrentStep(currentStep+1);
   }
   const prev = () => setCurrentStep(currentStep-1);
@@ -63,12 +48,14 @@ const SignupForm = () => {
           <br></br>
           <br></br>
         </div>
-        <MultiStepFormContext.Provider value = {{email, setEmail, next, prev, pw, setPW, name, phone, setName, setPhone}}>
+        <MultiStepFormContext.Provider value = {{email, setEmail, next, prev, pw, setPW, 
+          name, phone, setName, setPhone, address, setAddress, address_detail, setAddress_Detail}}>
           <Steps current = {currentStep} direction="horizontal">
-            <Step title = {"Checking agreement"}/>
-            <Step title = {"Setting Email"}/>
-            <Step title = {"Setting Password"}/>
-            <Step title = {"Setting name and phone num"}/>
+            <Step title = {"Agreement"}/>
+            <Step title = {"Email"}/>
+            <Step title = {"Password"}/>
+            <Step title = {"Address"}/>
+            <Step title = {"Name and Phone"}/>
           </Steps>
           <main>{renderStep(currentStep)}</main>
         </MultiStepFormContext.Provider>

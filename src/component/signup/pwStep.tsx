@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {Formik} from "formik";
+import {Form, Formik} from "formik";
 import {Button} from "antd";
 import MultiStepFormContext from "./MultiStepFormContext"
 
@@ -26,23 +26,25 @@ const PwStep: React.FC  = () => {
 >
 {({ handleSubmit, handleChange, handleBlur, values, errors }) => (
    <div className='contentWrap'>
-     <div className='inputTitle'>비밀번호 입력</div>
-     <div className='inputWrap'>
-       <input 
+    <Form onSubmit={handleSubmit}> 
+      <div className='inputTitle'>비밀번호</div>
+      <div className='inputWrap'>
+        <input 
           className='input'
           name="pw"
           type="password" 
           value={values.pw} 
           onChange={handleChange} 
           onBlur={handleBlur}
-       />
-     </div>
-     <Button className='centerButton' type="default" onClick={() => prev()}>
-       Back
-     </Button>
-     <Button className='bottomButton' type="primary" onClick={() => handleSubmit()}>
-       Next
-     </Button>
+        />
+      </div>
+      <Button className='centerButton' type="default" onClick={() => prev()}>
+        이전으로
+      </Button>
+      <Button className='bottomButton' type="primary" onClick={() => handleSubmit()}>
+        다음으로
+      </Button>
+     </Form>
    </div> 
 )}
 </Formik>

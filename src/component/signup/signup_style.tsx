@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 const Body_Signup = styled.div`
     .page{
-        margin-left: 10%;
-        margin-right: 10%;
-        padding: 1rem;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding: 0.5rem;
         display: flex;
         flex-direction: column;
         position: relative;
@@ -74,7 +74,9 @@ const Body_Signup = styled.div`
         color: white;
         cursor: pointer;
     }
-
+    .ant-steps-item{
+        flex-direction: row;
+    }
     .ant-steps-item-active > .ant-steps-item-container > .ant-steps-item-icon{
         background-color: #FF4471;
         border: none;
@@ -84,9 +86,16 @@ const Body_Signup = styled.div`
     }
       
     @media (max-width: 768px) {
-        .ant-steps-item-title{
-            display:none;
+        .ant-steps-item-content::after{
+            display: none;
         }
+        // .ant-steps{
+        //     flex-direction: column;
+        // }
+        // .steps-container{
+        //     display: flex;
+        //     justify-content: center;
+        // }          
     }
     
 `;
