@@ -2,6 +2,7 @@
   "name": "ssang-sang",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -18,7 +19,10 @@
     "@types/node": "^16.18.50",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
+    "antd": "^5.9.4",
+    "axios": "^1.5.1",
     "bootstrap": "^5.3.1",
+    "formik": "^2.4.5",
     "gapi-script": "^1.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 declare global {
   interface Window {
@@ -19,22 +19,33 @@ export default function NaverLogin_Button() {
       loginButton: {
         color: "green",
         type: 1,
-        height: 100,
+        height: 70,
       },
       callbackHandle: true,
     });
     naverLogin.init();
   }
-
+  const handleNaverLogin = () => {
+    if (
+      document &&
+      document?.querySelector("#naverIdLogin")?.firstChild &&
+      window !== undefined
+    ) {
+      const loginBtn: any = document.getElementById("naverIdLogin")?.firstChild;
+      loginBtn.click();
+    }
+  };
   return (
-    <React.Fragment>
-      <div
-        id="naverIdLogin"
-        style={{
-          margin: "70px",
-        }}
-      ></div>
-    </React.Fragment>
+    <>
+      <div id="naverIdLogin" style={{ display: "none" }}></div>
+      <img
+        id="loginNaverBtn"
+        onClick={handleNaverLogin}
+        alt="navericon"
+        src="icon/naverWhite.png"
+        style={{ height: "5rem", margin: "0 1rem 0 1rem" }}
+      ></img>
+    </>
   );
 }
 

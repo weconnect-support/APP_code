@@ -35,7 +35,6 @@ const Headerbox = styled.div<{ isVisible: boolean; windowWidth: number }>`
     margin: 0 0 0 0.5rem;
   }
   .userIcon {
-    display: none;
     font-size: 1.5rem;
     padding: 1rem 1rem;
   }
@@ -87,7 +86,7 @@ const Headerbox = styled.div<{ isVisible: boolean; windowWidth: number }>`
       align-items: flex-end;
       width: 30%;
       background-color: white;
-      display: ${(props) => (props.isVisible ? "flex" : "none")};
+      display: flex;
     }
 
     .inputBar {

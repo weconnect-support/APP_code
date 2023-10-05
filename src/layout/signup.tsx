@@ -1,8 +1,8 @@
 import MainHeader from "../component/header/mainHeader";
 import Footer from "./../component/footer/footer";
-import NormalLogin from "./../component/login/normalLogin";
+import Signup_Body from "../component/body/signupbody";
 
-function Login() {
+function Signup() {
   return (
     <div
       style={{
@@ -11,10 +11,10 @@ function Login() {
       }}
     >
       <MainHeader />
-      <NormalLogin />
+      <Signup_Body />
       <Footer />
     </div>
   );
 }
 
-export default Login;
+export default Signup;
