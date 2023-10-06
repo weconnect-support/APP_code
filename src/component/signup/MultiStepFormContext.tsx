@@ -1,18 +1,25 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
 interface MultiStepFormContextProps {
-  email: string;
   setEmail: (email: string) => void;
   next: () => void;
   prev: () => void;
-  pw: string;
   setPW: (pw: string) => void;
-  name: string;
-  phone: string;
   setName: (name: string) => void;
   setPhone: (phone: string) => void;
+  email: string;
+  pw: string;
+  name: string;
+  phone: string;
+  nickname: string;
+  address: string;
+  address_detail: string;
+  platform: number;
+  noti_flag: number;
 }
 
-const MultiStepFormContext = createContext<MultiStepFormContextProps | null>(null);
+const MultiStepFormContext = createContext<MultiStepFormContextProps | null>(
+  null
+);
 
 export default MultiStepFormContext;

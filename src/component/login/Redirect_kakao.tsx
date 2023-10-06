@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 function RedirectKakao() {
-  const navigate = useNavigate();
+  /*const navigate = useNavigate();
 
   useEffect(() => {
     getData();
@@ -11,6 +11,7 @@ function RedirectKakao() {
   const getData = async () => {
     const code = new URL(window.location.href).searchParams.get("code");
     console.log("kakao: " + code);
+
     let data = await axios({
       url: "https://ss-dev.noe.systems/users/login",
       method: "POST",
@@ -22,7 +23,7 @@ function RedirectKakao() {
     console.log(data.data);
     //navigate("/");
   };
-  return <div></div>;
+  return <div></div>;*/
 }
 
 export default RedirectKakao;

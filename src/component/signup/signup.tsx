@@ -38,6 +38,20 @@ const SignupForm = () => {
   const [phone, setPhone] = useState("");
   const [currentStep, setCurrentStep] = useState(0);
 
+  const [nickname, setnickname] = useState("");
+  const [address, setAddress] = useState("");
+  const [address_detail, setAdressDetail] = useState("");
+  const [platform, setPlatform] = useState(0);
+  const [noti_flag, setNoti_flag] = useState(0);
+
+  /*
+  const [user, setuser] = useState({
+    email: "asdf",
+    pw:"asdf",
+    name,
+    phone,
+    currentStep,
+  })*/
   const next = () => {
     if (currentStep === 3) {
       setCurrentStep(0);
@@ -63,16 +77,21 @@ const SignupForm = () => {
         </div>
         <MultiStepFormContext.Provider
           value={{
-            email,
             setEmail,
             next,
             prev,
-            pw,
             setPW,
-            name,
-            phone,
             setName,
             setPhone,
+            email,
+            pw,
+            name,
+            phone,
+            nickname,
+            address,
+            address_detail,
+            platform,
+            noti_flag,
           }}
         >
           <Steps current={currentStep} direction="horizontal">

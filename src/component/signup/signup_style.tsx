@@ -4,7 +4,7 @@ const Body_Signup = styled.div`
     .page{
         margin-left: 10%;
         margin-right: 10%;
-        padding: 10px;
+        padding: 1rem;
         display: flex;
         flex-direction: column;
         position: relative;
@@ -12,24 +12,25 @@ const Body_Signup = styled.div`
         height: 80vh;
     }
     .titleWrap{
-        margin-top: 50px;
+        margin-top: 1rem;
         font-size: 26px;
         font-weight: 700;
     }
     .contentWrap {
-        margin-top: 26px;
+        margin-top: 1rem;
         flex: 1;
     }
     .inputTitle {
+        margin-top: 1rem;
         font-size: 12px;
         font-weight: 600;
         color: #262626;
     }
     .inputWrap {
         display: flex;
-        border-radius: 8px;
-        padding: 16px;
-        margin-top: 8px;
+        border-radius: 1rem;
+        padding: 1rem;
+        margin-top: 1rem;
         background-color: white;
         border: 1px solid #e2e0e0;
     }
@@ -41,7 +42,7 @@ const Body_Signup = styled.div`
         width: 100%;
         outline: none;
         border: none;
-        height: 17px;
+        height: 1rem;
         font-size: 14px;
         font-weight: 400;
     }
@@ -50,16 +51,27 @@ const Body_Signup = styled.div`
         color: #dadada;
     }
     
-    .bottomButton {
-        margin-top: 26px;
+    .centerButton {
+        margin-top: 1rem;
         width: 100%;
-        height: 48px;
+        height: 3rem;
+        border: none;
+        font-weight: bold;
+        border-radius: 64px;
+        background-color: white;
+        color: black;
+        cursor: pointer;
+    }
+
+    .bottomButton {
+        margin-top: 0.5rem;
+        width: 100%;
+        height: 3rem;
         border: none;
         font-weight: bold;
         border-radius: 64px;
         background-color: #FF4471;
         color: white;
-        margin-bottom: 16px;
         cursor: pointer;
     }
 

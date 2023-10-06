@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./layout/login";
 import Signup from "./layout/signup";
 import RedirectNaver from "./component/login/Redirect_naver";
-import RedirectKakao from "./component/login/Redirect_kakao";
 import List from "./layout/List";
 
 function App() {
@@ -21,7 +20,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/naver" element={<RedirectNaver />}></Route>
-        <Route path="/kakao" element={<RedirectKakao />}></Route>
+
         <Route path="/list" element={<List />}></Route>
       </Routes>
     </Stack>
