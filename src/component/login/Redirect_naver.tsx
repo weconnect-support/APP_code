@@ -21,6 +21,7 @@ function RedirectNaver() {
         },
       });
       console.log(data.data);
+      await localStorage.setItem("jwt-token", data.data.token);
       navigate("/");
     }
   };

@@ -7,6 +7,7 @@ import Login from "./layout/login";
 import Signup from "./layout/signup";
 import RedirectNaver from "./component/login/Redirect_naver";
 import List from "./layout/List";
+import UserDetail from "./layout/userDetail";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/naver" element={<RedirectNaver />}></Route>
-
+        <Route path="/detail/:id" element={<UserDetail />}></Route>
         <Route path="/list" element={<List />}></Route>
       </Routes>
     </Stack>

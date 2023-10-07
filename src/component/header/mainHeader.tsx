@@ -8,32 +8,66 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function MainHeader() {
   const [usertoggled, setUserToggled] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isJwt, setIsJwt] = useState(false);
+  const [isIdx, setIsIdx] = useState(false);
+  const [userIdx, setIdx] = useState("");
+
+  const navigate = useNavigate();
 
   const userClick = () => {
     setUserToggled(!usertoggled);
   };
+
   useEffect(() => {
+    checkJWt();
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  const navigate = useNavigate();
   const gohome = () => {
     navigate("/");
   };
   const gologin = () => {
-    navigate("/login");
+    if (isIdx && isJwt) {
+      navigate(`/detail/${userIdx}`);
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const logout = async () => {
+    await localStorage.removeItem("jwt-token");
+    setIsJwt(false);
+    console.log("complete");
+  };
+
+  const checkJWt = async () => {
+    const jwtToken = localStorage.getItem("jwt-token");
+    if (jwtToken === null) {
+      console.log("no token!");
+    } else {
+      setIsJwt(true);
+      console.log(jwtToken);
+
+      let data = await axios({
+        url: "https://api-dev.weconnect.support/users",
+        method: "GET",
+        headers: { authorization: jwtToken },
+      });
+      console.log(data.data);
+      setIdx(data.data.userInfo.idx);
+      setIsIdx(true);
+    }
   };
 
   return (
@@ -44,7 +78,12 @@ function MainHeader() {
       </div>
       {/*user 버튼*/}
       <div className="userIcon" onClick={userClick}>
-        <FontAwesomeIcon className="alarmBell" icon={faBell}></FontAwesomeIcon>
+        <FontAwesomeIcon
+          className="alarmBell"
+          icon={faBell}
+          onClick={logout}
+          style={{ cursor: "pointer" }}
+        ></FontAwesomeIcon>
         <FontAwesomeIcon
           className="user"
           icon={faUser}

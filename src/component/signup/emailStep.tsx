@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {Formik} from "formik";
+import {Form, Formik} from "formik";
 import {Button} from "antd";
 import MultiStepFormContext from "./MultiStepFormContext"
 
@@ -26,6 +26,7 @@ const EmailStep: React.FC  = () => {
 >
 {({ handleSubmit, handleChange, handleBlur, values, errors }) => (
    <div className='contentWrap'>
+    <Form onSubmit={handleSubmit}>
      <div className='inputTitle'>이메일 입력</div>
      <div className='inputWrap'>
        <input 
@@ -38,11 +39,12 @@ const EmailStep: React.FC  = () => {
        />
      </div>
      <Button className='centerButton' type="default" onClick={() => prev()}>
-       Back
+       이전으로
      </Button>
      <Button className='bottomButton' type="primary" onClick={() => handleSubmit()}>
-       Next
+       다음으로
      </Button>
+     </Form>
    </div> 
 )}
 </Formik>

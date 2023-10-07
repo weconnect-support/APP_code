@@ -30,6 +30,8 @@ const GoogleLogin_Button = (props: any) => {
       },
     });
     console.log(data.data);
+    await localStorage.setItem("jwt-token", data.data.token);
+
     navigate("/");
   };
   const LoginFailure = (res: any) => {

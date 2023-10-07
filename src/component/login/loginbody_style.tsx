@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Body_Login = styled.div`
-  padding-bottom: 1 rem;
+  padding-bottom: 1rem;
   .page {
     margin-left: 10%;
     margin-right: 10%;

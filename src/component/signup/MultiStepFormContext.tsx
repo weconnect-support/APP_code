@@ -12,10 +12,12 @@ interface MultiStepFormContextProps {
   name: string;
   phone: string;
   nickname: string;
-  address: string;
-  address_detail: string;
   platform: number;
   noti_flag: number;
+  address: string;
+  setAddress: (address: string) => void;
+  address_detail: string;
+  setAddress_Detail: (address_detail: string) => void;
 }
 
 const MultiStepFormContext = createContext<MultiStepFormContextProps | null>(

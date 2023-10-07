@@ -1,10 +1,10 @@
 import { Body_Login } from "./loginbody_style";
-import { Link, Route, Routes } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import NaverLogin_Button from "../login/naverLogin";
 import KakaoLogin_Button from "../login/kakaoLogin";
 import GoogleLogin_Button from "../login/googleLogin";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 interface FormProps {
   onSubmit: (data: FormData) => void;
@@ -14,14 +14,28 @@ interface FormData {
   password: string;
 }
 function NormalLogin() {
+  const navigation = useNavigate();
   const [values, setValues] = useState<FormData>({
     email: "",
     password: "",
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(JSON.stringify(values, null, 2));
+    console.log(values);
+    let data = await axios({
+      url: "https://ss-dev.noe.systems/users/login",
+      method: "POST",
+      data: {
+        email: values.email,
+        password: values.password,
+        platform: 4, //4 email
+      },
+    });
+    await localStorage.setItem("jwt-token", data.data.token);
+
+    navigation("/");
+    console.log(data.data);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

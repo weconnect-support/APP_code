@@ -17,6 +17,8 @@ export default function KakaoLogin_Button() {
       },
     });
     console.log(data_server.data);
+
+    await localStorage.setItem("jwt-token", data_server.data.token);
     navation("/");
   };
   const Onfailure = (err: any) => {

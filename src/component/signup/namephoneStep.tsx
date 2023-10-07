@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import { Button } from "antd";
 import MultiStepFormContext from "./MultiStepFormContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const NamePhoneStep: React.FC = () => {
   const contextValue = useContext(MultiStepFormContext);
@@ -11,21 +12,33 @@ const NamePhoneStep: React.FC = () => {
     return <div>Error: Context not provided</div>;
   }
   const { name, setName, phone, setPhone, prev } = contextValue;
-
-  const submitForm = async () => {
-    const { email, name, phone } = contextValue;
+  const goToLogin = () => {
+    //회원가입 정상적으로 됐으면 로그인으로 가게 만들기
+    //navigate('/login')
+  };
+  const submitForm = async (inputName: string, inputPhone: string) => {
+    const { email, pw, address, address_detail } = contextValue;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords.latitude);
+        console.log(position.coords.longitude);
+      });
+    }
+    const nickname = "xiaxia";
+    const platform = 4;
+    const noti_flag = 1;
+    const device_id = "he";
     const data = {
-      //email,
-      access_token: "58Cl_6jN2OytX9P-jYirJUUFL-3jAQRtUFkpgUiSCiolTwAAAYsAaUcy",
-      name,
-      //password: "asdf",
-      phone,
-      nickname: "asdf",
-      address: "asdf",
-      address_detail: "asdf",
-      device_id: "asddf",
-      platform: 2,
-      noti_flag: 1,
+      email,
+      password: pw,
+      name: inputName,
+      phone: inputPhone,
+      address,
+      address_detail,
+      nickname,
+      platform,
+      noti_flag,
+      device_id,
     };
     console.log(data);
 
@@ -37,54 +50,6 @@ const NamePhoneStep: React.FC = () => {
       .then((res) => {
         console.log(res);
       });
-    // .catch((err)=>console.log(err))
-    // fetch('', {//axios
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(data)
-    // })
-    // .then(response => response.json())//then -> async 함수 밖 await 함수 내 timeout, 비동기 10초 123456으로; promise -> 성공resolve 실패reject;
-    // //
-    // .then(data => console.log(data))
-    // .catch((error) => {
-    //   console.error('Error:', error);
-    // });
-
-    //블로그
-    // const onSubmit = useCallback(
-    //   (e) => {
-    //     e.preventDefault();
-    //     console.log(email, nickname, password, passwordCheck);
-    //     if (!mismatchError) {
-    //       console.log('서버로 회원가입하기');
-    //       setSignUpError('');
-    //       setSignUpSuccess(false);
-    //       // 요청 보내기 직전에 값들을 전부 초기화 해주자. 아니라면 요청을 연달아 날릴 때
-    //       // 첫번째 요청때 남아있던 결과가 두번째 요청때도 똑같이 표시되는
-    //       // 문제가 있을 수 있다.
-    //       axios
-    //         .post('/api/users', {
-    //           email,
-    //           nickname,
-    //           password,
-    //         })
-    //         .then((response) => {
-    //           // 성공시
-    //           console.log(response);
-    //           setSignUpSuccess(true);
-    //         })
-    //         .catch((error) => {
-    //           // 실패시
-    //           console.log(error.response);
-    //           setSignUpError(error.response.data);
-    //         })
-    //         .finally(() => {});
-    //     }
-    //   },
-    //   [email, nickname, password, passwordCheck],
-    // );
   };
 
   return (
@@ -93,7 +58,7 @@ const NamePhoneStep: React.FC = () => {
       onSubmit={(values) => {
         setName(values.name);
         setPhone(values.phone);
-        submitForm();
+        submitForm(values.name, values.phone);
       }}
       validate={(values) => {
         const errors: { name?: string; phone?: string } = {};
@@ -104,42 +69,46 @@ const NamePhoneStep: React.FC = () => {
     >
       {({ handleSubmit, handleChange, handleBlur, values, errors }) => (
         <div className="contentWrap">
-          <div className="inputTitle">이름</div>
-          <div className="inputWrap">
-            <input
-              className="input"
-              name="name"
-              type="text"
-              value={values.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </div>
-          <div className="inputTitle">전화번호 입력</div>
-          <div className="inputWrap">
-            <input
-              className="input"
-              name="phone"
-              type="tel"
-              value={values.phone}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </div>
-          <Button
-            className="centerButton"
-            type="default"
-            onClick={() => prev()}
-          >
-            Back
-          </Button>
-          <Button
-            className="bottomButton"
-            type="primary"
-            onClick={() => handleSubmit()}
-          >
-            Register
-          </Button>
+          <Form onSubmit={handleSubmit}>
+            <div className="inputTitle">이름</div>
+            <div className="inputWrap">
+              <input
+                className="input"
+                name="name"
+                type="text"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            <div className="inputTitle">전화번호 입력</div>
+            <div className="inputWrap">
+              <input
+                className="input"
+                name="phone"
+                type="tel"
+                value={values.phone}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+
+            <Button
+              className="centerButton"
+              type="default"
+              onClick={() => prev()}
+            >
+              이전으로
+            </Button>
+            <Button
+              className="bottomButton"
+              type="primary"
+              htmlType="submit"
+              onClick={() => goToLogin()}
+            >
+              회원가입하기
+            </Button>
+          </Form>
         </div>
       )}
     </Formik>

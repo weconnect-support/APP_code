@@ -1,68 +1,39 @@
 import React, { useState } from "react";
 import { Steps } from "antd";
 import MultiStepFormContext from "./MultiStepFormContext";
-
+import AddressStep from "./addressStep";
 import EmailStep from "./emailStep";
 import PasswordStep from "./pwStep";
 import NamePhoneStep from "./namephoneStep";
-// import AgreementStep from './agreementStep';
+import AgreementStep from "./agreementStep";
 import { Body_Signup } from "./signup_style";
 
 const { Step } = Steps;
 
 const renderStep = (step: number) => {
   switch (step) {
-    // case 0:
-    //   return <AgreementStep/>;
-    // case 1:
-    //   return <EmailStep/>;
-    // case 2:
-    //   return <PasswordStep/>;
-    // case 3:
-    //   return <NamePhoneStep/>;
-
-    case 0:
-      return <EmailStep />;
     case 1:
-      return <PasswordStep />;
+      return <EmailStep />;
     case 2:
+      return <PasswordStep />;
+    case 4:
       return <NamePhoneStep />;
+    case 3:
+      return <AddressStep />;
+    case 0:
+      return <AgreementStep />;
   }
 };
 
 const SignupForm = () => {
-  const [agreement, setAgreement] = useState("");
   const [email, setEmail] = useState("");
   const [pw, setPW] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [currentStep, setCurrentStep] = useState(0);
-
-  const [nickname, setnickname] = useState("");
   const [address, setAddress] = useState("");
-  const [address_detail, setAdressDetail] = useState("");
-  const [platform, setPlatform] = useState(0);
-  const [noti_flag, setNoti_flag] = useState(0);
-
-  /*
-  const [user, setuser] = useState({
-    email: "asdf",
-    pw:"asdf",
-    name,
-    phone,
-    currentStep,
-  })*/
+  const [address_detail, setAddress_Detail] = useState("");
   const next = () => {
-    if (currentStep === 3) {
-      setCurrentStep(0);
-      setAgreement("");
-      setEmail("");
-      setPW("");
-      setName("");
-      setPhone("");
-      return;
-    }
-
     setCurrentStep(currentStep + 1);
   };
   const prev = () => setCurrentStep(currentStep - 1);
@@ -77,28 +48,31 @@ const SignupForm = () => {
         </div>
         <MultiStepFormContext.Provider
           value={{
+            email,
             setEmail,
             next,
             prev,
-            setPW,
-            setName,
-            setPhone,
-            email,
             pw,
+            setPW,
             name,
             phone,
-            nickname,
+            setName,
+            setPhone,
             address,
+            setAddress,
             address_detail,
-            platform,
-            noti_flag,
+            setAddress_Detail,
+            nickname: "",
+            noti_flag: 0,
+            platform: 1,
           }}
         >
           <Steps current={currentStep} direction="horizontal">
-            <Step title={"Checking agreement"} />
-            <Step title={"Setting Email"} />
-            <Step title={"Setting Password"} />
-            <Step title={"Setting name and phone num"} />
+            <Step title={"Agreement"} />
+            <Step title={"Email"} />
+            <Step title={"Password"} />
+            <Step title={"Address"} />
+            <Step title={"Name and Phone"} />
           </Steps>
           <main>{renderStep(currentStep)}</main>
         </MultiStepFormContext.Provider>
