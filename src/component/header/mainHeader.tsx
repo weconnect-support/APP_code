@@ -47,25 +47,25 @@ function MainHeader() {
 
   const logout = async () => {
     await localStorage.removeItem("jwt-token");
+    await localStorage.removeItem("user-idx");
+    setIsIdx(false);
     setIsJwt(false);
+    setIdx("");
     console.log("complete");
   };
 
   const checkJWt = async () => {
     const jwtToken = localStorage.getItem("jwt-token");
-    if (jwtToken === null) {
-      console.log("no token!");
+    const Idx = localStorage.getItem("user-idx");
+    if (jwtToken === null || userIdx === null) {
+      console.log("no token! or userId!");
     } else {
       setIsJwt(true);
       console.log(jwtToken);
-
-      let data = await axios({
-        url: "https://api-dev.weconnect.support/users",
-        method: "GET",
-        headers: { authorization: jwtToken },
-      });
-      console.log(data.data);
-      setIdx(data.data.userInfo.idx);
+      if (!Idx) {
+        return null; // 또는 원하는 다른 처리 방식을 적용할 수 있습니다.
+      }
+      setIdx(Idx);
       setIsIdx(true);
     }
   };

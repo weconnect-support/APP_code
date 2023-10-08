@@ -21,7 +21,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/naver" element={<RedirectNaver />}></Route>
-        <Route path="/detail/:id" element={<UserDetail />}></Route>
+        <Route path="/detail/:idx" element={<UserDetail />}></Route>
         <Route path="/list" element={<List />}></Route>
       </Routes>
     </Stack>
