@@ -5,6 +5,7 @@ import KakaoLogin_Button from "../login/kakaoLogin";
 import GoogleLogin_Button from "../login/googleLogin";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Box } from "@mui/material";
 
 interface FormProps {
   onSubmit: (data: FormData) => void;
@@ -41,6 +42,11 @@ function NormalLogin() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
+  };
+
+  const goToSignup = async () => {
+    const platform = 4
+    navigation("/signup", {state:{platform}});
   };
 
   return (
@@ -84,6 +90,13 @@ function NormalLogin() {
             확인
           </button>
         </form>
+      </div>
+      <div className="signupContainer">
+        <div className="line"></div>
+          <button className="goToSignup" onClick={goToSignup}>
+            이메일로 회원가입
+          </button>
+        <div className="line"></div>
       </div>
       <div className="socialLogin">
         <div className="naverLogin">

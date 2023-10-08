@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Steps } from "antd";
 import MultiStepFormContext from "./MultiStepFormContext";
 import AddressStep from "./addressStep";
@@ -33,6 +34,9 @@ const SignupForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [address, setAddress] = useState("");
   const [address_detail, setAddress_Detail] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [password_verify, setPassword_verify] = useState("");
+  const location = useLocation();
   const next = () => {
     setCurrentStep(currentStep + 1);
   };
@@ -62,14 +66,18 @@ const SignupForm = () => {
             setAddress,
             address_detail,
             setAddress_Detail,
-            nickname: "",
+            nickname,
             noti_flag: 0,
-            platform: 1,
+            platform: location.state.platform,
+            token: location.state.token,
+            setNickname,
+            password_verify,
+            setPassword_verify
           }}
         >
           <Steps current={currentStep} direction="horizontal">
             <Step title={"Agreement"} />
-            <Step title={"Email"} />
+            <Step title={"Email & Nickname"} />
             <Step title={"Password"} />
             <Step title={"Address"} />
             <Step title={"Name and Phone"} />

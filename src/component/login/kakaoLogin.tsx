@@ -3,23 +3,28 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 export default function KakaoLogin_Button() {
+  const platform = 2;
   const navation = useNavigate();
   const kakaoCientId = "9506e59c870563dc4a3f4a13121908cb";
   const OnSuccess = async (data: any) => {
     console.log(data);
     const token = data.response.access_token;
     let data_server = await axios({
-      url: "https://ss-dev.noe.systems/users/login",
+      url: "https://api-dev.weconnect.support/users/login",
       method: "POST",
       data: {
         access_token: token,
         platform: 2, // 1 google, 2 kakao, 3 naver
       },
     });
-    console.log(data_server.data);
-
-    await localStorage.setItem("jwt-token", data_server.data.token);
-    navation("/");
+    if(data_server.data.text=="login fail"){
+      console.log('hi');
+      navation('../signup', {state: {platform, token}});
+    }  
+    else{
+      await localStorage.setItem("jwt-token", data_server.data.token);
+      navation("/");
+    }
   };
   const Onfailure = (err: any) => {
     console.log(err);

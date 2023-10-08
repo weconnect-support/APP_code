@@ -86,8 +86,11 @@ const Body_Signup = styled.div`
     }
       
     @media (max-width: 768px) {
-        .ant-steps-item-content::after{
-            display: none;
+        .ant-steps {
+            flex-direction:row;
+        }
+        .ant-steps-item-title{
+            display:none;
         }
         // .ant-steps{
         //     flex-direction: column;

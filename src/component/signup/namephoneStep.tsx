@@ -1,34 +1,34 @@
 import React, { useContext } from "react";
 import { Form, Formik } from "formik";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import MultiStepFormContext from "./MultiStepFormContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const NamePhoneStep: React.FC = () => {
   const contextValue = useContext(MultiStepFormContext);
+  const navigate = useNavigate();
   if (!contextValue) {
     // Handle the case where the context is not provided.
     return <div>Error: Context not provided</div>;
   }
   const { name, setName, phone, setPhone, prev } = contextValue;
   const goToLogin = () => {
-    //회원가입 정상적으로 됐으면 로그인으로 가게 만들기
     //navigate('/login')
   };
   const submitForm = async (inputName: string, inputPhone: string) => {
-    const { email, pw, address, address_detail } = contextValue;
+    const { email, pw, address, address_detail, platform, token, nickname } = contextValue;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position.coords.latitude);
         console.log(position.coords.longitude);
       });
     }
-    const nickname = "xiaxia";
-    const platform = 4;
     const noti_flag = 1;
     const device_id = "he";
-    const data = {
+    var data;
+    if (platform==4){
+      data = {
       email,
       password: pw,
       name: inputName,
@@ -39,17 +39,39 @@ const NamePhoneStep: React.FC = () => {
       platform,
       noti_flag,
       device_id,
-    };
+    };}
+    else{
+      data = {
+        access_token: token,
+        name: inputName,
+        phone: inputPhone,
+        address,
+        address_detail,
+        nickname,
+        platform,
+        noti_flag,
+        device_id,
+    }
+  }
     console.log(data);
 
-    var url = "https://api-dev.weconnect.support/users/join";
+    var url = "https://api-dev.weconnect.support/users/join"  
     axios
-      .post(url, data, {
+    .post(url, data, {
         headers: { "Content-Type": `application/json` }, //'X-Requested-With': 'XMLHttpRequest'
       })
-      .then((res) => {
-        console.log(res);
-      });
+    .then(
+      (res) => {
+        console.log(res.data);
+        let messagePromise;
+        if (res.data.text == "email valid") {
+          messagePromise = message.error('이미 존재하는 아이디입니다.', 1);
+        } else {
+          messagePromise = message.success('회원가입을 축하합니다!', 1);
+        }
+        messagePromise.then(()=>navigate('/login'));
+      }
+    );
   };
 
   return (

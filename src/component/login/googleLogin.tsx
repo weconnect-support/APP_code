@@ -20,6 +20,8 @@ const GoogleLogin_Button = (props: any) => {
   }, []);
 
   const LoginSuccess = async (res: any) => {
+    const platform = 1;
+    const token = res.accessToken;
     console.log("google: " + res.accessToken);
     let data = await axios({
       url: "https://ss-dev.noe.systems/users/login",
@@ -29,10 +31,16 @@ const GoogleLogin_Button = (props: any) => {
         platform: 1, // 1 google, 2 kakao, 3 naver
       },
     });
-    console.log(data.data);
-    await localStorage.setItem("jwt-token", data.data.token);
 
-    navigate("/");
+    if(data.data.text=="login fail"){
+        console.log('hi');
+        navigate('../signup', {state: {platform, token}});
+      }        
+    else{
+      console.log(data.data);
+      await localStorage.setItem("jwt-token", data.data.token);
+      navigate("/");
+    }
   };
   const LoginFailure = (res: any) => {
     console.log(res);
