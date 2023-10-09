@@ -68,13 +68,13 @@ function Detail_Body({ idx }: propsType) {
         authorization: token,
       },
       data: {
-        nickname: "qwe",
-        name: "권 경민",
-        phone: "qer",
-        address: "qwer",
-        address_detail: "qwer",
-        noti_flag: 1,
-        device_id: "he",
+        nickname: pageIdxData.nickname,
+        name: pageIdxData.name,
+        phone: pageIdxData.phone,
+        address: pageIdxData.address,
+        address_detail: pageIdxData.address_detail,
+        noti_flag: pageIdxData.noti_flag,
+        device_id: pageIdxData.device_id,
       },
     });
     console.log(data.data);
