@@ -5,11 +5,8 @@ import KakaoLogin_Button from "../login/kakaoLogin";
 import GoogleLogin_Button from "../login/googleLogin";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Box } from "@mui/material";
+import { message } from "antd";
 
-interface FormProps {
-  onSubmit: (data: FormData) => void;
-}
 interface FormData {
   email: string;
   password: string;
@@ -24,6 +21,10 @@ function NormalLogin() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(values);
+    if(values.email.length===0||values.password.length===0){
+      message.error('아이디와 비밀번호를 입력하세요');
+      return;
+    }
     let token_data = await axios({
       url: "https://ss-dev.noe.systems/users/login",
       method: "POST",
@@ -32,16 +33,23 @@ function NormalLogin() {
         password: values.password,
         platform: 4, //4 email
       },
-    });
+    }); 
+    if (token_data.data.text=="login_fail"){
+      console.log(token_data);
+      message.error('아이디 혹은 비밀번호가 일치하지 않습니다');
+      return;
+    }
     await localStorage.setItem("jwt-token", token_data.data.token);
-
-    let user_data = await axios({
-      url: "https://api-dev.weconnect.support/users",
-      method: "GET",
-      headers: { authorization: token_data.data.token },
-    });
-    await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
-
+    if (localStorage.getItem("jwt-token") === "undefined") {
+      console.log("no token");
+    } else {
+      let user_data = await axios({
+        url: "https://api-dev.weconnect.support/users",
+        method: "GET",
+        headers: { authorization: token_data.data.token },
+      });
+      await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
+    }
     navigation("/");
     //console.log("Token: " +token_data.data);
   };

@@ -10,7 +10,7 @@ const EmailStep: React.FC  = () => {
     // Handle the case where the context is not provided.
     return <div>Error: Context not provided</div>;
   }
-  const { email, setEmail, nickname, setNickname, next, prev} = contextValue;
+  const { platform, email, setEmail, nickname, setNickname, next, prev} = contextValue;
   return (
     <Formik<{ email: string, nickname: string }>
   initialValues={{ email, nickname }}
@@ -21,7 +21,7 @@ const EmailStep: React.FC  = () => {
   }}
   validate={(values) => {
     const errors: { email?: string, nickname?: string } = {};
-    if (!values.email) errors.email = "Email is required";
+    if (platform==4 && !values.email) errors.email = "Email is required";
     if (!values.nickname) errors.nickname = "Nickname is required";
     return errors;
   }}
@@ -29,12 +29,12 @@ const EmailStep: React.FC  = () => {
 {({ handleSubmit, handleChange, handleBlur, values, errors }) => (
     <div className='contentWrap'>
       <Form onSubmit={handleSubmit}>
-        <div className='inputTitle'>이메일 입력</div>
-        <div className='inputWrap'>
+        <div style={{display: platform==4 ? '' : 'none'}} className='inputTitle'>이메일 입력</div>
+        <div style={{display: platform==4 ? '' : 'none'}} className='inputWrap'>
           <input 
             className='input'
             name="email"
-            type="email" 
+            type= "email" 
             value={values.email} 
             onChange={handleChange} 
             onBlur={handleBlur}

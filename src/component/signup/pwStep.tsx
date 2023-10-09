@@ -4,7 +4,7 @@ import {Button} from "antd";
 import MultiStepFormContext from "./MultiStepFormContext"
 
 const PwStep: React.FC  = () => {
-
+  
   const contextValue = useContext(MultiStepFormContext);
   if (!contextValue) {
     // Handle the case where the context is not provided.

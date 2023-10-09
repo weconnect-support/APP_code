@@ -38,9 +38,9 @@ const SignupForm = () => {
   const [password_verify, setPassword_verify] = useState("");
   const location = useLocation();
   const next = () => {
-    setCurrentStep(currentStep + 1);
-  };
-  const prev = () => setCurrentStep(currentStep - 1);
+    location.state.platform!==4 && currentStep==1 ? setCurrentStep(currentStep + 2) : setCurrentStep(currentStep + 1)
+    };
+  const prev = () => {location.state.platform!==4 && currentStep==3 ? setCurrentStep(currentStep - 2) : setCurrentStep(currentStep-1)}
 
   return (
     <Body_Signup>
