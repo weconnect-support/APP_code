@@ -20,6 +20,8 @@ const GoogleLogin_Button = (props: any) => {
   }, []);
 
   const LoginSuccess = async (res: any) => {
+    const platform = 1;
+    const token = res.accessToken;
     console.log("google: " + res.accessToken);
     let token_data = await axios({
       url: "https://ss-dev.noe.systems/users/login",
@@ -29,17 +31,23 @@ const GoogleLogin_Button = (props: any) => {
         platform: 1, // 1 google, 2 kakao, 3 naver
       },
     });
-    console.log(token_data.data);
-    await localStorage.setItem("jwt-token", token_data.data.token);
 
-    let user_data = await axios({
-      url: "https://api-dev.weconnect.support/users",
-      method: "GET",
-      headers: { authorization: token_data.data.token },
-    });
-    await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
-
-    navigate("/");
+    if(token_data.data.text=="login fail"){
+      console.log('hi');
+      navigate('../signup', {state: {platform, token}});
+    }        
+    else{
+      console.log(token_data.data);
+      await localStorage.setItem("jwt-token", token_data.data.token);
+          
+      let user_data = await axios({
+        url: "https://api-dev.weconnect.support/users",
+        method: "GET",
+        headers: { authorization: token_data.data.token },
+      });
+      await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
+      navigate("/");
+    }
   };
   const LoginFailure = (res: any) => {
     console.log(res);

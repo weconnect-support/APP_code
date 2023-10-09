@@ -54,7 +54,7 @@ const AddressStep: React.FC  = () => {
         <Button className='centerButton' type="default" onClick={() => prev()}>
         이전으로
         </Button>
-        <Button className='bottomButton' type="primary" onClick={() => handleSubmit()}>
+        <Button className='bottomButton' type="primary" htmlType="submit" onClick={() => handleSubmit()}>
         다음으로
         </Button>
      </Form>

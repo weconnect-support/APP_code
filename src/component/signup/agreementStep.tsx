@@ -62,6 +62,7 @@ const AgreementStep: React.FC = () => {
               <Button
                 className="bottomButton"
                 type="primary"
+                htmlType="submit"
                 onClick={() => handleSubmit()}
               >
                 다음으로

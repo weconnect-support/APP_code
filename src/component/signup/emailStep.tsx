@@ -10,41 +10,56 @@ const EmailStep: React.FC  = () => {
     // Handle the case where the context is not provided.
     return <div>Error: Context not provided</div>;
   }
-  const { email, setEmail, next, prev} = contextValue;
+  const { email, setEmail, nickname, setNickname, next, prev} = contextValue;
   return (
-    <Formik<{ email: string }>
-  initialValues={{ email }}
+    <Formik<{ email: string, nickname: string }>
+  initialValues={{ email, nickname }}
   onSubmit={(values) => {
     setEmail(values.email);
+    setNickname(values.nickname);
     next();
   }}
   validate={(values) => {
-    const errors: { email?: string } = {};
+    const errors: { email?: string, nickname?: string } = {};
     if (!values.email) errors.email = "Email is required";
+    if (!values.nickname) errors.nickname = "Nickname is required";
     return errors;
   }}
 >
 {({ handleSubmit, handleChange, handleBlur, values, errors }) => (
-   <div className='contentWrap'>
-    <Form onSubmit={handleSubmit}>
-     <div className='inputTitle'>이메일 입력</div>
-     <div className='inputWrap'>
-       <input 
-          className='input'
-          name="email"
-          type="email" 
-          value={values.email} 
-          onChange={handleChange} 
-          onBlur={handleBlur}
-       />
-     </div>
-     <Button className='centerButton' type="default" onClick={() => prev()}>
-       이전으로
-     </Button>
-     <Button className='bottomButton' type="primary" onClick={() => handleSubmit()}>
-       다음으로
-     </Button>
-     </Form>
+    <div className='contentWrap'>
+      <Form onSubmit={handleSubmit}>
+        <div className='inputTitle'>이메일 입력</div>
+        <div className='inputWrap'>
+          <input 
+            className='input'
+            name="email"
+            type="email" 
+            value={values.email} 
+            onChange={handleChange} 
+            onBlur={handleBlur}
+            placeholder='이메일을 입력하세요'
+          />
+        </div>
+        <div className='inputTitle'>닉네임 입력</div>
+        <div className='inputWrap'> 
+          <input 
+            className='input'
+            name="nickname"
+            type="text" 
+            value={values.nickname} 
+            onChange={handleChange} 
+            onBlur={handleBlur}
+            placeholder='닉네임을 입력하세요'
+          />
+        </div>
+        <Button className='centerButton' type="default" onClick={() => prev()}>
+          이전으로
+        </Button>
+        <Button className='bottomButton' type="primary" htmlType="submit" onClick={() => handleSubmit()}>
+          다음으로
+        </Button>
+      </Form>
    </div> 
 )}
 </Formik>
