@@ -1,6 +1,7 @@
 import Body_Detail from "./userDetail_Style";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 interface propsType {
   idx: string;
@@ -22,10 +23,11 @@ function Detail_Body({ idx }: propsType) {
     phone: "",
     address: "",
     address_detail: "",
-    device_id: "",
     noti_flag: 0,
+    device_id: "",
   });
   const [token, setToken] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserIdx(Number(idx));
@@ -42,6 +44,7 @@ function Detail_Body({ idx }: propsType) {
         method: "GET",
         headers: { authorization: token },
       });
+      console.log("유저정보 잘 가져와용~~");
       setPageIdxData({
         nickname: data.data.userInfo.nickname,
         name: data.data.userInfo.name,
@@ -65,13 +68,13 @@ function Detail_Body({ idx }: propsType) {
         authorization: token,
       },
       data: {
-        nickname: pageIdxData.nickname,
-        name: pageIdxData.name,
-        phone: pageIdxData.phone,
-        address: pageIdxData.address,
-        address_detail: pageIdxData.address_detail,
-        device_id: pageIdxData.device_id, // notification
-        noti_flag: pageIdxData.noti_flag, // notification
+        nickname: "qwe",
+        name: "권 경민",
+        phone: "qer",
+        address: "qwer",
+        address_detail: "qwer",
+        noti_flag: 1,
+        device_id: "he",
       },
     });
     console.log(data.data);
@@ -80,6 +83,18 @@ function Detail_Body({ idx }: propsType) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPageIdxData({ ...pageIdxData, [name]: value });
+  };
+
+  const deleteUser = async () => {
+    let data = await axios({
+      url: "https://api-dev.weconnect.support/users",
+      method: "DELETE",
+      headers: { authorization: token },
+    });
+    console.log(data.data);
+    localStorage.removeItem("jwt-token");
+    localStorage.removeItem("user-idx");
+    navigate("/");
   };
 
   return (
@@ -133,6 +148,8 @@ function Detail_Body({ idx }: propsType) {
           확인
         </button>
       </form>
+
+      <button onClick={deleteUser}>삭제하기!!</button>
     </Body_Detail>
   );
 }

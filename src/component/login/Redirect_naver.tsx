@@ -9,7 +9,7 @@ function RedirectNaver() {
   }, []);
 
   const getData = async () => {
-    const platform = 3
+    const platform = 3;
     if (window.location.href.includes("access_token")) {
       const token = window.location.href.split("=")[1].split("&")[0];
       console.log("naver: " + token);
@@ -20,15 +20,14 @@ function RedirectNaver() {
           access_token: token,
           platform, // 1 google, 2 kakao, 3 naver
         },
-
       });
       //token 없을 때 회원 가입 넘어가는 부분
-      if(token_data.data.text=="login fail"){
-        console.log('hi');
-        navigate('../signup', {state: {platform, token}});
+      if (token_data.data.text === "login fail") {
+        console.log("hi");
+        navigate("../signup", { state: { platform, token } });
       }
       //로그인 진행
-      else{
+      else {
         console.log(token_data.data);
         await localStorage.setItem("jwt-token", token_data.data.token);
 
@@ -41,8 +40,6 @@ function RedirectNaver() {
 
         navigate("/");
       }
-      
-
     }
   };
 
