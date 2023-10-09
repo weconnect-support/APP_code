@@ -6,9 +6,6 @@ import GoogleLogin_Button from "../login/googleLogin";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-interface FormProps {
-  onSubmit: (data: FormData) => void;
-}
 interface FormData {
   email: string;
   password: string;
@@ -33,14 +30,16 @@ function NormalLogin() {
       },
     });
     await localStorage.setItem("jwt-token", token_data.data.token);
-
-    let user_data = await axios({
-      url: "https://api-dev.weconnect.support/users",
-      method: "GET",
-      headers: { authorization: token_data.data.token },
-    });
-    await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
-
+    if (localStorage.getItem("jwt-token") === "undefined") {
+      console.log("no token");
+    } else {
+      let user_data = await axios({
+        url: "https://api-dev.weconnect.support/users",
+        method: "GET",
+        headers: { authorization: token_data.data.token },
+      });
+      await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
+    }
     navigation("/");
     //console.log("Token: " +token_data.data);
   };

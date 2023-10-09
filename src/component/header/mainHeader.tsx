@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Header_box from "./mainHeaderStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBell,
-  faMagnifyingGlass,
-  faTimes,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBell, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 function MainHeader() {
   const [usertoggled, setUserToggled] = useState(false);
@@ -61,7 +55,6 @@ function MainHeader() {
       console.log("no token! or userId!");
     } else {
       setIsJwt(true);
-      console.log(jwtToken);
       if (!Idx) {
         return null; // 또는 원하는 다른 처리 방식을 적용할 수 있습니다.
       }
