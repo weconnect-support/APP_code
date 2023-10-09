@@ -24,7 +24,7 @@ function NormalLogin() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(values);
-    let data = await axios({
+    let token_data = await axios({
       url: "https://ss-dev.noe.systems/users/login",
       method: "POST",
       data: {
@@ -33,10 +33,17 @@ function NormalLogin() {
         platform: 4, //4 email
       },
     });
-    await localStorage.setItem("jwt-token", data.data.token);
+    await localStorage.setItem("jwt-token", token_data.data.token);
+
+    let user_data = await axios({
+      url: "https://api-dev.weconnect.support/users",
+      method: "GET",
+      headers: { authorization: token_data.data.token },
+    });
+    await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
 
     navigation("/");
-    console.log(data.data);
+    //console.log("Token: " +token_data.data);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

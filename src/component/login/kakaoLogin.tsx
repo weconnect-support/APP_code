@@ -9,22 +9,33 @@ export default function KakaoLogin_Button() {
   const OnSuccess = async (data: any) => {
     console.log(data);
     const token = data.response.access_token;
-    let data_server = await axios({
-      url: "https://api-dev.weconnect.support/users/login",
+
+    let token_data = await axios({
+      url: "https://ss-dev.noe.systems/users/login",
       method: "POST",
       data: {
         access_token: token,
         platform: 2, // 1 google, 2 kakao, 3 naver
       },
     });
-    if(data_server.data.text=="login fail"){
+    console.log(token_data.data);
+
+    if(token_data.data.text=="login fail"){
       console.log('hi');
       navation('../signup', {state: {platform, token}});
     }  
     else{
-      await localStorage.setItem("jwt-token", data_server.data.token);
-      navation("/");
-    }
+    
+    await localStorage.setItem("jwt-token", token_data.data.token);
+
+    let user_data = await axios({
+      url: "https://api-dev.weconnect.support/users",
+      method: "GET",
+      headers: { authorization: token_data.data.token },
+    });
+    await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
+
+    navation("/");}
   };
   const Onfailure = (err: any) => {
     console.log(err);

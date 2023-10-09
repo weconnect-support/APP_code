@@ -23,7 +23,7 @@ const GoogleLogin_Button = (props: any) => {
     const platform = 1;
     const token = res.accessToken;
     console.log("google: " + res.accessToken);
-    let data = await axios({
+    let token_data = await axios({
       url: "https://ss-dev.noe.systems/users/login",
       method: "POST",
       data: {
@@ -32,13 +32,20 @@ const GoogleLogin_Button = (props: any) => {
       },
     });
 
-    if(data.data.text=="login fail"){
-        console.log('hi');
-        navigate('../signup', {state: {platform, token}});
-      }        
+    if(token_data.data.text=="login fail"){
+      console.log('hi');
+      navigate('../signup', {state: {platform, token}});
+    }        
     else{
-      console.log(data.data);
-      await localStorage.setItem("jwt-token", data.data.token);
+      console.log(token_data.data);
+      await localStorage.setItem("jwt-token", token_data.data.token);
+          
+      let user_data = await axios({
+        url: "https://api-dev.weconnect.support/users",
+        method: "GET",
+        headers: { authorization: token_data.data.token },
+      });
+      await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
       navigate("/");
     }
   };
