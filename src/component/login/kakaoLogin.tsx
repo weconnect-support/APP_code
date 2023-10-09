@@ -20,22 +20,21 @@ export default function KakaoLogin_Button() {
     });
     console.log(token_data.data);
 
-    if(token_data.data.text=="login fail"){
-      console.log('hi');
-      navation('../signup', {state: {platform, token}});
-    }  
-    else{
-    
-    await localStorage.setItem("jwt-token", token_data.data.token);
+    if (token_data.data.text === "login fail") {
+      console.log("hi");
+      navation("../signup", { state: { platform, token } });
+    } else {
+      await localStorage.setItem("jwt-token", token_data.data.token);
 
-    let user_data = await axios({
-      url: "https://api-dev.weconnect.support/users",
-      method: "GET",
-      headers: { authorization: token_data.data.token },
-    });
-    await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
+      let user_data = await axios({
+        url: "https://api-dev.weconnect.support/users",
+        method: "GET",
+        headers: { authorization: token_data.data.token },
+      });
+      await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
 
-    navation("/");}
+      navation("/");
+    }
   };
   const Onfailure = (err: any) => {
     console.log(err);
