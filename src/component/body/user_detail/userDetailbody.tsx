@@ -28,6 +28,7 @@ function Detail_Body({ idx }: propsType) {
   });
   const [token, setToken] = useState("");
   const navigate = useNavigate();
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     getUserIdx(Number(idx));
@@ -60,24 +61,30 @@ function Detail_Body({ idx }: propsType) {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(pageIdxData);
-
-    let data = await axios({
-      url: "https://api-dev.weconnect.support/users",
-      method: "PATCH",
-      headers: {
-        authorization: token,
-      },
-      data: {
-        nickname: pageIdxData.nickname,
-        name: pageIdxData.name,
-        phone: pageIdxData.phone,
-        address: pageIdxData.address,
-        address_detail: pageIdxData.address_detail,
-        noti_flag: pageIdxData.noti_flag,
-        device_id: pageIdxData.device_id,
-      },
-    });
-    console.log(data.data);
+    
+    if(edit){
+      let data = await axios({
+        url: "https://api-dev.weconnect.support/users",
+        method: "PATCH",
+        headers: {
+          authorization: token,
+        },
+        data: {
+          nickname: pageIdxData.nickname,
+          name: pageIdxData.name,
+          phone: pageIdxData.phone,
+          address: pageIdxData.address,
+          address_detail: pageIdxData.address_detail,
+          noti_flag: pageIdxData.noti_flag,
+          device_id: pageIdxData.device_id,
+        },
+      });
+      console.log(data.data);
+      setEdit(false);
+    }
+    else{
+      setEdit(true);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,56 +107,75 @@ function Detail_Body({ idx }: propsType) {
   return (
     <Body_Detail>
       <form className="detailList" onSubmit={handleSubmit}>
+        <div className="titleWrap">
+          프로필
+          <br></br>
+          <br></br>
+        </div>
         <label className="form-label">닉네임</label>
-        <input
-          type="text"
-          className="input"
-          name="nickname"
-          defaultValue={pageIdxData.nickname}
-          onChange={handleChange}
-        />
+        <div className={`inputWrap ${edit ? '' : 'disabled'}`}>
+          <input
+            type="text"
+            className="input"
+            name="nickname"
+            defaultValue={pageIdxData.nickname}
+            onChange={handleChange}
+            disabled={!edit}
+          />
+        </div>
         <label className="form-label">이름</label>
-        <input
-          type="text"
-          className="input"
-          name="name"
-          defaultValue={pageIdxData.name}
-          onChange={handleChange}
-        />
+        <div className={`inputWrap ${edit ? '' : 'disabled'}`}>
+          <input
+            type="text"
+            className="input"
+            name="name"
+            defaultValue={pageIdxData.name}
+            onChange={handleChange}
+            disabled={!edit}
+          />
+        </div>
         <label className="form-label">핸드폰 번호</label>
-        <input
-          type="text"
-          className="input"
-          name="phone"
-          defaultValue={pageIdxData.phone}
-          onChange={handleChange}
-        />
+        <div className={`inputWrap ${edit ? '' : 'disabled'}`}>
+          <input
+            type="text"
+            className="input"
+            name="phone"
+            defaultValue={pageIdxData.phone}
+            onChange={handleChange}
+            disabled={!edit}
+          />
+        </div> 
         <label className="form-label">주소</label>
-        <input
-          type="text"
-          className="input"
-          name="address"
-          defaultValue={pageIdxData.address}
-          onChange={handleChange}
-        />
+        <div className={`inputWrap ${edit ? '' : 'disabled'}`}>
+          <input
+            type="text"
+            className="input"
+            name="address"
+            defaultValue={pageIdxData.address}
+            onChange={handleChange}
+            disabled={!edit}
+          />
+        </div>
         <label className="form-label">상세주소</label>
-        <input
-          type="text"
-          className="input"
-          name="address_detail"
-          defaultValue={pageIdxData.address_detail}
-          onChange={handleChange}
-        />
+        <div className={`inputWrap ${edit ? '' : 'disabled'}`}> 
+          <input
+            type="text"
+            className="input"
+            name="address_detail"
+            defaultValue={pageIdxData.address_detail}
+            onChange={handleChange}
+            disabled={!edit}
+          />
+        </div>
         <button
           type="submit"
-          style={{ marginTop: "26px" }}
           className="bottomButton"
         >
-          확인
+          {edit ? '수정완료' : '수정'}
         </button>
       </form>
 
-      <button onClick={deleteUser}>삭제하기!!</button>
+      { edit ? null : <button onClick={deleteUser} className="delButton">탈퇴하기</button>}
     </Body_Detail>
   );
 }
