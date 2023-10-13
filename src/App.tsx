@@ -8,6 +8,7 @@ import Signup from "./layout/signup";
 import RedirectNaver from "./component/login/Redirect_naver";
 import List from "./layout/List";
 import UserDetail from "./layout/userDetail";
+import Register from "./layout/register";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/naver" element={<RedirectNaver />}></Route>
         <Route path="/detail/:idx" element={<UserDetail />}></Route>
         <Route path="/list" element={<List />}></Route>
+        <Route path="/register" element={<Register />}></Route>
       </Routes>
     </Stack>
   );
