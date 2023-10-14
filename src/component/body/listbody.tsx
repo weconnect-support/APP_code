@@ -1,17 +1,34 @@
-import React from "react";
 import ListCard from "./body_component/findListcard";
 import Body_List from "./listbody_Style";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function List_Body() {
   const navigate = useNavigate();
-  const goToRegister = () =>{
+  const goToRegister = () => {
     console.log("hi");
     navigate("/register");
-  }
+  };
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    getVolunteerInfo();
+  }, []);
+  const getVolunteerInfo = async () => {
+    let data = await axios({
+      method: "GET",
+      url: "https://api-dev.weconnect.support/volunteer",
+      headers: {
+        Authorization: localStorage.getItem("jwt-token"),
+      },
+    });
+    console.log(data.data.data);
+  };
   return (
     <Body_List>
-      <button onClick={() => goToRegister()} 
+      <button
+        onClick={() => goToRegister()}
         style={{
           marginTop: "1rem",
           width: "90%",
@@ -22,7 +39,8 @@ function List_Body() {
           backgroundColor: "#FF4471",
           color: "white",
           cursor: "pointer",
-        }}>
+        }}
+      >
         활동 등록하기
       </button>
       <ListCard />

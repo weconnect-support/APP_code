@@ -1,9 +1,10 @@
-import MainHeader from "../component/header/mainHeader";
-import Footer from "./../component/footer/footer";
-import Detail_Body from "../component/body/user_detail/userDetailbody";
+import Footer from "../component/footer/footer";
 import { useParams } from "react-router";
+import Volunteer_Detail from "../component/body/volunteerDetail/volunteerDetail";
 
-function UserDetail() {
+import DetailFooter from "./../component/footer/detailFooter";
+
+function VolDetail() {
   const params = useParams();
 
   if (!params.idx) {
@@ -17,10 +18,10 @@ function UserDetail() {
         padding: "0",
       }}
     >
-      <Detail_Body idx={params.idx} />
-      <Footer />
+      <Volunteer_Detail idx={params.idx} />
+      <DetailFooter />
     </div>
   );
 }
 
-export default UserDetail;
+export default VolDetail;

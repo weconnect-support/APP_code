@@ -2,13 +2,14 @@ import React from "react";
 import Main from "./layout/main";
 import { Reset } from "styled-reset";
 import { Stack } from "@mui/material";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./layout/login";
 import Signup from "./layout/signup";
 import RedirectNaver from "./component/login/Redirect_naver";
 import List from "./layout/List";
 import UserDetail from "./layout/userDetail";
 import Register from "./layout/register";
+import VolDetail from "./layout/volunteerDetail";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/detail/:idx" element={<UserDetail />}></Route>
         <Route path="/list" element={<List />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/volunteer/:idx" element={<VolDetail />}></Route>
       </Routes>
     </Stack>
   );

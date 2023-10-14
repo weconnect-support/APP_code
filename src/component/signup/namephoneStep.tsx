@@ -17,7 +17,8 @@ const NamePhoneStep: React.FC = () => {
     //navigate('/login')
   };
   const submitForm = async (inputName: string, inputPhone: string) => {
-    const { email, pw, address, address_detail, platform, token, nickname } = contextValue;
+    const { email, pw, address, address_detail, platform, token, nickname } =
+      contextValue;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position.coords.latitude);
@@ -27,20 +28,20 @@ const NamePhoneStep: React.FC = () => {
     const noti_flag = 1;
     const device_id = "he";
     var data;
-    if (platform==4){
+    if (platform == 4) {
       data = {
-      email,
-      password: pw,
-      name: inputName,
-      phone: inputPhone,
-      address,
-      address_detail,
-      nickname,
-      platform,
-      noti_flag,
-      device_id,
-    };}
-    else{
+        email,
+        password: pw,
+        name: inputName,
+        phone: inputPhone,
+        address,
+        address_detail,
+        nickname,
+        platform,
+        noti_flag,
+        device_id,
+      };
+    } else {
       data = {
         access_token: token,
         name: inputName,
@@ -51,27 +52,25 @@ const NamePhoneStep: React.FC = () => {
         platform,
         noti_flag,
         device_id,
+      };
     }
-  }
     console.log(data);
 
-    var url = "https://api-dev.weconnect.support/users/join"  
+    var url = "https://api-dev.weconnect.support/users/join";
     axios
-    .post(url, data, {
+      .post(url, data, {
         headers: { "Content-Type": `application/json` }, //'X-Requested-With': 'XMLHttpRequest'
       })
-    .then(
-      (res) => {
+      .then((res) => {
         console.log(res.data);
         let messagePromise;
         if (res.data.text == "email valid") {
-          messagePromise = message.error('이미 존재하는 아이디입니다.', 1);
+          messagePromise = message.error("이미 존재하는 아이디입니다.", 1);
         } else {
-          messagePromise = message.success('회원가입을 축하합니다!', 1);
+          messagePromise = message.success("회원가입을 축하합니다!", 1);
         }
-        messagePromise.then(()=>navigate('/login'));
-      }
-    );
+        messagePromise.then(() => navigate("/login"));
+      });
   };
 
   return (

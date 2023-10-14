@@ -61,8 +61,8 @@ function Detail_Body({ idx }: propsType) {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(pageIdxData);
-    
-    if(edit){
+
+    if (edit) {
       let data = await axios({
         url: "https://api-dev.weconnect.support/users",
         method: "PATCH",
@@ -81,8 +81,7 @@ function Detail_Body({ idx }: propsType) {
       });
       console.log(data.data);
       setEdit(false);
-    }
-    else{
+    } else {
       setEdit(true);
     }
   };
@@ -113,7 +112,7 @@ function Detail_Body({ idx }: propsType) {
           <br></br>
         </div>
         <label className="form-label">닉네임</label>
-        <div className={`inputWrap ${edit ? '' : 'disabled'}`}>
+        <div className={`inputWrap ${edit ? "" : "disabled"}`}>
           <input
             type="text"
             className="input"
@@ -124,7 +123,7 @@ function Detail_Body({ idx }: propsType) {
           />
         </div>
         <label className="form-label">이름</label>
-        <div className={`inputWrap ${edit ? '' : 'disabled'}`}>
+        <div className={`inputWrap ${edit ? "" : "disabled"}`}>
           <input
             type="text"
             className="input"
@@ -135,7 +134,7 @@ function Detail_Body({ idx }: propsType) {
           />
         </div>
         <label className="form-label">핸드폰 번호</label>
-        <div className={`inputWrap ${edit ? '' : 'disabled'}`}>
+        <div className={`inputWrap ${edit ? "" : "disabled"}`}>
           <input
             type="text"
             className="input"
@@ -144,9 +143,9 @@ function Detail_Body({ idx }: propsType) {
             onChange={handleChange}
             disabled={!edit}
           />
-        </div> 
+        </div>
         <label className="form-label">주소</label>
-        <div className={`inputWrap ${edit ? '' : 'disabled'}`}>
+        <div className={`inputWrap ${edit ? "" : "disabled"}`}>
           <input
             type="text"
             className="input"
@@ -157,7 +156,7 @@ function Detail_Body({ idx }: propsType) {
           />
         </div>
         <label className="form-label">상세주소</label>
-        <div className={`inputWrap ${edit ? '' : 'disabled'}`}> 
+        <div className={`inputWrap ${edit ? "" : "disabled"}`}>
           <input
             type="text"
             className="input"
@@ -167,15 +166,16 @@ function Detail_Body({ idx }: propsType) {
             disabled={!edit}
           />
         </div>
-        <button
-          type="submit"
-          className="bottomButton"
-        >
-          {edit ? '수정완료' : '수정'}
+        <button type="submit" className="bottomButton">
+          {edit ? "수정완료" : "수정"}
         </button>
       </form>
 
-      { edit ? null : <button onClick={deleteUser} className="delButton">탈퇴하기</button>}
+      {edit ? null : (
+        <button onClick={deleteUser} className="delButton">
+          탈퇴하기
+        </button>
+      )}
     </Body_Detail>
   );
 }

@@ -3,6 +3,7 @@ import Header_box from "./mainHeaderStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { faUbuntu } from "@fortawesome/free-brands-svg-icons";
 
 function MainHeader() {
   const [usertoggled, setUserToggled] = useState(false);
@@ -37,6 +38,9 @@ function MainHeader() {
     } else {
       navigate("/login");
     }
+  };
+  const goDetail = () => {
+    navigate(`/volunteer/${1}`);
   };
 
   const logout = async () => {
@@ -81,6 +85,11 @@ function MainHeader() {
           className="user"
           icon={faUser}
           onClick={gologin}
+        ></FontAwesomeIcon>
+        <FontAwesomeIcon
+          className="detail"
+          icon={faUbuntu}
+          onClick={goDetail}
         ></FontAwesomeIcon>
       </div>
     </Header_box>
