@@ -17,6 +17,7 @@ function UserDetail() {
         padding: "0",
       }}
     >
+      <MainHeader />
       <Detail_Body idx={params.idx} />
       <Footer />
     </div>
