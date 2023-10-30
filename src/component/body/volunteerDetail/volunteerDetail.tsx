@@ -10,13 +10,28 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useNavigate } from "react-router-dom";
+import CommentCard from "./comment/commentCard";
 
 interface propsType {
   idx: string;
 }
 
+export interface comment {
+  comment: string;
+  created_at: Date;
+  delete_time: Date | null;
+  idx: number;
+  is_delete: number;
+  is_protect: number;
+  last_modify_time: Date;
+  name: string;
+  nickname: string;
+  user_idx: number;
+  volunteer_idx: number;
+}
+
 interface FormData {
-  comments: [];
+  comments: comment[];
   current_customer: number;
   current_volunteer: number;
   customers: [];
@@ -130,20 +145,23 @@ const Volunteer_Detail = ({ idx }: propsType) => {
       </div>
       <div id="image"></div>
       <div className="info">
-        <div id="address">서울시 강서구</div>
-        <div id="title">모집 관련 타이틀입니다.</div>
-        <div id="date">2023.11.19 ~ 2023.11.20</div>
+        <div id="address">{volIdxData.volunteer.address}</div>
+        <div id="title">{volIdxData.volunteer.name}</div>
+        <div id="date"></div>
         <div id="category">
           <span>카테고리.</span>
-          <span id="categoryTag">카테고리명이 들어갑니다.</span>
+          <span id="categoryTag">{volIdxData.volunteer.category}</span>
         </div>
       </div>
       <div className="explain">
         <div>활동 내용</div>
-        <div id="detail">봉사활동에 대한 내용이 들어갑니다.</div>
+        <div id="detail">{volIdxData.volunteer.detail}</div>
       </div>
       <div className="comment">
-        <p> 댓글 11</p>
+        <p>댓글 {volIdxData.comments.length}</p>
+        {volIdxData.comments.map((comment) => (
+          <CommentCard key={comment.idx} comment={comment} />
+        ))}
       </div>
     </VolDetail_Body>
   );

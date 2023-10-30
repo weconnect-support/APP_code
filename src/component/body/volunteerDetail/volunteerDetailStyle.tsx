@@ -38,7 +38,7 @@ const VolDetail_Body = styled.div`
   .info {
     width: 90%;
     padding: 1rem 1rem 2rem 1rem;
-    border-bottom: 0.1rem solid gray;
+    border-bottom: 0.1rem solid #d5d5d5;
   }
   #address {
     margin: 1rem 0 1rem 0;
@@ -71,7 +71,7 @@ const VolDetail_Body = styled.div`
   .explain {
     width: 90%;
     padding: 1rem;
-    border-bottom: 0.1rem solid gray;
+    border-bottom: 0.1rem solid #d5d5d5;
   }
   .explain div {
     color: gray;
@@ -86,7 +86,7 @@ const VolDetail_Body = styled.div`
     width: 90%;
   }
   .comment p {
-    margin: 2rem 0 1rem 0;
+    margin: 2rem 0 1rem 1rem;
     font-size: 1.2rem;
     font-weight: 600;
   }
