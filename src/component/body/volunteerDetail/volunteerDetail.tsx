@@ -160,9 +160,10 @@ const Volunteer_Detail = ({ idx }: propsType) => {
       <div className="comment">
         <p>댓글 {volIdxData.comments.length}</p>
         {volIdxData.comments.map((comment) => (
-          <CommentCard key={comment.idx} comment={comment} />
+          <CommentCard key={comment.idx} comment={comment} idx={idx} />
         ))}
       </div>
+      <div style={{ margin: "0 0 4rem 0" }}></div>
     </VolDetail_Body>
   );
 };
