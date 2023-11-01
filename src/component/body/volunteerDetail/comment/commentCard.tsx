@@ -3,11 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleUser,
   faEllipsisVertical,
+  faPaperPlane,
+  faSquareArrowUpRight,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { Card } from "./commentCardstyle";
 import axios from "axios";
+import TextareaAutosize from "react-textarea-autosize";
 
 interface CommentCardProps {
   comment: comment;
@@ -17,8 +21,17 @@ interface CommentCardProps {
 const CommentCard = ({ comment, idx }: CommentCardProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
-  const [editConfirm, setEditConfirm] = useState(false);
   const [clickedIdx, setClickedIdx] = useState(0);
+  const [idxEqual, setIdxEqual] = useState(false);
+  const [editHidden, setEditHidden] = useState(false);
+  const [editContent, setEditContent] = useState(comment.comment);
+  const [editing, setEditing] = useState(false);
+
+  useEffect(() => {
+    if (Number(localStorage.getItem("user-idx")) === comment.user_idx) {
+      setIdxEqual(true);
+    }
+  }, []);
 
   const DeleteConfirmMessage = () => {
     const deleteComment = async () => {
@@ -30,7 +43,6 @@ const CommentCard = ({ comment, idx }: CommentCardProps) => {
         },
       };
       const res = await axios(config);
-      console.log(res.data);
       window.location.reload();
     };
 
@@ -122,43 +134,6 @@ const CommentCard = ({ comment, idx }: CommentCardProps) => {
     );
   };
 
-  const EditConfimMessage = () => {
-    const customModalStyles2: ReactModal.Styles = {
-      overlay: {
-        backgroundColor: " rgba(0, 0, 0, 0.4)",
-        width: "100%",
-        height: "100vh",
-        zIndex: "10",
-        position: "fixed",
-        top: "0",
-        left: "0",
-      },
-      content: {
-        width: "80%",
-        height: "15%",
-        zIndex: "150",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        borderRadius: "10px",
-        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
-        backgroundColor: "white",
-        justifyContent: "center",
-        overflow: "auto",
-      },
-    };
-
-    return (
-      <Modal
-        isOpen={editConfirm}
-        onRequestClose={() => setEditConfirm(false)}
-        ariaHideApp={false}
-        style={customModalStyles2}
-      ></Modal>
-    );
-  };
-
   const PopupMessage = () => {
     const customModalStyles: ReactModal.Styles = {
       overlay: {
@@ -226,7 +201,7 @@ const CommentCard = ({ comment, idx }: CommentCardProps) => {
             }}
             onClick={() => {
               setModalIsOpen(!modalIsOpen);
-              setEditConfirm(!deleteConfirm);
+              setEditHidden(!editHidden);
             }}
           >
             내용 수정하기
@@ -234,6 +209,24 @@ const CommentCard = ({ comment, idx }: CommentCardProps) => {
         </div>
       </Modal>
     );
+  };
+  const textAreaChange = (e: any) => {
+    setEditContent(e.target.value);
+  };
+  const submitEdit = async () => {
+    let config = {
+      method: "PUT",
+      url: `https://api-dev.weconnect.support/volunteer/${idx}/comment/${clickedIdx}`,
+      headers: {
+        Authorization: localStorage.getItem("jwt-token"),
+      },
+      data: {
+        comment: editContent,
+      },
+    };
+
+    const res = await axios(config);
+    window.location.reload();
   };
 
   return (
@@ -243,18 +236,50 @@ const CommentCard = ({ comment, idx }: CommentCardProps) => {
         <div id="userName">{comment.name} </div>
         <div id="createDate">2023.10.30</div>
         <FontAwesomeIcon
+          className={`${idxEqual ? "" : "disabled"} ${
+            editing ? "disabled" : ""
+          }`}
           id="extra"
           icon={faEllipsisVertical}
           onClick={() => {
             setClickedIdx(comment.idx);
             setModalIsOpen(!modalIsOpen);
+            setEditing(!editing);
+          }}
+        ></FontAwesomeIcon>
+        <FontAwesomeIcon
+          className={`${idxEqual ? "" : "disabled"} ${
+            editing ? "" : "disabled"
+          }`}
+          id="cancel"
+          icon={faX}
+          onClick={() => {
+            setEditing(!editing);
+            setEditHidden(!editHidden);
           }}
         ></FontAwesomeIcon>
         <PopupMessage />
         <DeleteConfirmMessage />
-        <EditConfimMessage />
       </div>
-      <div id="comment">{comment.comment}</div>
+      <div className={`commentDetail ${editHidden ? "disabled" : ""} `}>
+        {comment.comment}
+      </div>
+      <div className={`commentEdit ${editHidden ? "" : "disabled"} `}>
+        <TextareaAutosize
+          style={{
+            width: "90%",
+          }}
+          name="editContents"
+          id="editArea"
+          onChange={textAreaChange}
+          defaultValue={comment.comment}
+        ></TextareaAutosize>
+        <FontAwesomeIcon
+          id="commentEditBtn"
+          icon={faSquareArrowUpRight}
+          onClick={submitEdit}
+        ></FontAwesomeIcon>
+      </div>
     </Card>
   );
 };
