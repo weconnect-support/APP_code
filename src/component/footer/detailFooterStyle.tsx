@@ -7,7 +7,7 @@ const Participate = styled.div`
   bottom: 0;
   width: 100%;
   margin: 0;
-  height: 3rem;
+  height: 2rem;
   list-style-type: none;
   justify-content: space-around;
   align-items: center;

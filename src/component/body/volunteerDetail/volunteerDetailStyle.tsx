@@ -17,6 +17,9 @@ const VolDetail_Body = styled.div`
     background-color: transparent;
     z-index: 1;
   }
+  .disabled {
+    display: none;
+  }
 
   .backBtn {
     font-size: 1.8rem;
@@ -38,7 +41,7 @@ const VolDetail_Body = styled.div`
   .info {
     width: 90%;
     padding: 1rem 1rem 2rem 1rem;
-    border-bottom: 0.1rem solid gray;
+    border-bottom: 0.1rem solid #d5d5d5;
   }
   #address {
     margin: 1rem 0 1rem 0;
@@ -71,7 +74,7 @@ const VolDetail_Body = styled.div`
   .explain {
     width: 90%;
     padding: 1rem;
-    border-bottom: 0.1rem solid gray;
+    border-bottom: 0.1rem solid #d5d5d5;
   }
   .explain div {
     color: gray;
@@ -86,10 +89,32 @@ const VolDetail_Body = styled.div`
     width: 90%;
   }
   .comment p {
-    margin: 2rem 0 1rem 0;
+    margin: 1rem 0 1rem 1rem;
     font-size: 1.2rem;
     font-weight: 600;
   }
+  #enterComment {
+    margin: 2rem 0 1.5rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  #enterCommentBtn {
+    font-size: 2rem;
+  }
+  #enterArea {
+    width: 80%;
+    font-size: 1.5rem;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 2px;
+    &:focus{
+      outline: none;
+      box-shadow: none ;
+  }
+  
 `;
 
 export default VolDetail_Body;
