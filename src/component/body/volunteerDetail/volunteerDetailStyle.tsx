@@ -17,6 +17,9 @@ const VolDetail_Body = styled.div`
     background-color: transparent;
     z-index: 1;
   }
+  .disabled {
+    display: none;
+  }
 
   .backBtn {
     font-size: 1.8rem;
@@ -86,10 +89,32 @@ const VolDetail_Body = styled.div`
     width: 90%;
   }
   .comment p {
-    margin: 2rem 0 1rem 1rem;
+    margin: 1rem 0 1rem 1rem;
     font-size: 1.2rem;
     font-weight: 600;
   }
+  #enterComment {
+    margin: 2rem 0 1.5rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  #enterCommentBtn {
+    font-size: 2rem;
+  }
+  #enterArea {
+    width: 80%;
+    font-size: 1.5rem;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 2px;
+    &:focus{
+      outline: none;
+      box-shadow: none ;
+  }
+  
 `;
 
 export default VolDetail_Body;

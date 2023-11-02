@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleUser,
   faEllipsisVertical,
-  faPaperPlane,
   faSquareArrowUpRight,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
@@ -201,6 +200,7 @@ const CommentCard = ({ comment, idx }: CommentCardProps) => {
             }}
             onClick={() => {
               setModalIsOpen(!modalIsOpen);
+              setEditing(!editing);
               setEditHidden(!editHidden);
             }}
           >
@@ -244,7 +244,6 @@ const CommentCard = ({ comment, idx }: CommentCardProps) => {
           onClick={() => {
             setClickedIdx(comment.idx);
             setModalIsOpen(!modalIsOpen);
-            setEditing(!editing);
           }}
         ></FontAwesomeIcon>
         <FontAwesomeIcon
