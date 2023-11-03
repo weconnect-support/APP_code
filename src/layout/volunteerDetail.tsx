@@ -19,7 +19,7 @@ function VolDetail() {
       }}
     >
       <Volunteer_Detail idx={params.idx} />
-      <DetailFooter />
+      <DetailFooter idx={params.idx}/>
     </div>
   );
 }

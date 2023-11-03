@@ -19,7 +19,7 @@ function Main_Body() {
       <div className="findPeople">
         <div>봉사자를 찾습니다.</div>
         <Link to="/List" style={{ textDecoration: "none" }}>
-          <p>전체보기 +</p>
+          <p style={{paddingRight: "1rem"}}>전체보기 +</p>
         </Link>
       </div>
       <div className="findCardList">
@@ -33,7 +33,7 @@ function Main_Body() {
       <div className="findvolunteer">
         <div>봉사활동을 찾습니다.</div>
         <Link to="/List" style={{ textDecoration: "none" }}>
-          <p>전체보기 +</p>
+          <p style={{paddingRight: "1rem"}}>전체보기 +</p>
         </Link>
       </div>
       <div className="findCardList">

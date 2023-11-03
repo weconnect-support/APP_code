@@ -13,10 +13,7 @@ const Participate = styled.div`
   align-items: center;
   border-top: solid 1px;
   background-color: red;
-
-  #icon {
-    font-size: 2rem;
-  }
+  
 `;
 
 export default Participate;
