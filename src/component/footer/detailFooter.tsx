@@ -2,7 +2,7 @@ import Navigation from "./footer_style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import Participate from "./detailFooterStyle";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Modal from 'react-modal';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,6 +15,7 @@ function DetailFooter({ idx }: propsType) {
   const [selectedOption, setSelectedOption] = useState(0);
   const [popUpOpen, setPopUpOpen] = useState(false);
   const [check, setCheck] = useState(false);
+  const[volunteerOrCustomer, setVolORCus] = useState(0);
   const navigate = useNavigate();
 
   const onSubmit = async () => {
@@ -28,18 +29,56 @@ function DetailFooter({ idx }: propsType) {
       data: {
         type: selectedOption
       }
+    }
+    let res = await axios(config);
+    console.log(res.data);
+    setCheck(false);
+    setVolORCus(selectedOption);
   }
-  let res = await axios(config);
-  console.log(res.data);
-}
-  
+
+  const cancelVol = async () => {
+    setPopUpOpen(false);
+    console.log(volunteerOrCustomer);
+    let config = {
+      method: "DELETE",
+      url: `https://api-dev.weconnect.support/volunteer/${idx}/join`,
+      headers: {
+        Authorization: localStorage.getItem("jwt-token"),
+      },
+      data: {
+        type: volunteerOrCustomer,
+      }
+    }
+    let res = await axios(config);
+    console.log(res.data);
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axios.get(`https://api-dev.weconnect.support/volunteer/${idx}`, {
+        headers: {
+          Authorization: localStorage.getItem("jwt-token"),
+        },
+      });
+
+      console.log(data.data.volunteer); 
+      if(data.data.volunteer.joined===1||data.data.volunteer.joined===2){
+        setCheck(false);
+        setVolORCus(data.data.volunteer.joined);
+      } 
+      else{setCheck(true)}
+    };
+
+    fetchData();
+  }, [idx]);
   
   return (
     <Participate>
-      <button style={{width:"100vw", height:"200%", backgroundColor:"#ff4471", border:"none"}} onClick={()=>setPopUpOpen(true)}>신청하기</button>
+      <button style={{width:"100vw", height:"200%", backgroundColor: check ? "#ff4471":"#e2e2e2", border:"none"}} onClick={!check ? () => cancelVol() : () => setPopUpOpen(true)}>{check==true ? "신청하기" : "취소하기"}</button>
       <Modal
         className="Popup"
         isOpen = {popUpOpen}
+        onRequestClose={() => setPopUpOpen(false)}
         style={{
           content: {
             position: 'absolute',
