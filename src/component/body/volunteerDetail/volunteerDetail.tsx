@@ -18,12 +18,12 @@ interface propsType {
 
 export interface comment {
   comment: string;
-  created_at: Date;
-  delete_time: Date | null;
+  created_at: string;
+  delete_time: string;
   idx: number;
   is_delete: number;
   is_protect: number;
-  last_modify_time: Date;
+  last_modify_time: string;
   name: string;
   nickname: string;
   user_idx: number;
@@ -41,9 +41,9 @@ interface FormData {
     address_detail: string;
     category: string;
     customer_limit: number;
-    deadline: Date | "";
-    due_date: Date | "";
-    last_modify_time: Date | "";
+    deadline: string;
+    due_date: string;
+    last_modify_time: string;
     detail: string;
     email: string;
     idx: string;
@@ -92,6 +92,14 @@ const Volunteer_Detail = ({ idx }: propsType) => {
     getVolIdx(Number(idx));
   }, []);
 
+  function formatDate(date: string) {
+    const year = date.slice(0, 4);
+    const month = date.slice(5, 7);
+    const day = date.slice(8, 10);
+
+    return `${year}-${month}-${day}`;
+  }
+
   const getVolIdx = async (idx: number) => {
     let data = await axios({
       method: "GET",
@@ -118,12 +126,12 @@ const Volunteer_Detail = ({ idx }: propsType) => {
         address_detail: data.data.data.volunteer.address_detail,
         category: data.data.data.volunteer.category,
         customer_limit: data.data.data.volunteer.customer_limit,
-        deadline: data.data.data.volunteer.deadline,
+        deadline: formatDate(data.data.data.volunteer.deadline),
         detail: data.data.data.volunteer.detail,
-        due_date: data.data.data.volunteer.due_date,
+        due_date: formatDate(data.data.data.volunteer.due_date),
         email: data.data.data.volunteer.email,
         idx: data.data.data.volunteer.idx,
-        last_modify_time: data.data.data.volunteer.last_modify_time,
+        last_modify_time: formatDate(data.data.data.volunteer.last_modify_time),
         location: data.data.data.volunteer.location,
         name: data.data.data.volunteer.name,
         nickname: data.data.data.volunteer.nickname,
@@ -216,7 +224,7 @@ const Volunteer_Detail = ({ idx }: propsType) => {
               setCheckDeleteOption(true);
             }}
           >
-            댓글 삭제하기
+            모집 삭제하기
           </p>
           <p
             style={{
