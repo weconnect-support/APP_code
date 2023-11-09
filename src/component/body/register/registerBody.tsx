@@ -11,10 +11,10 @@ interface FormData {
   address: string;
   address_detail: string;
   category: string;
-  due_date: Date | "";
+  due_date: string;
   customer_limit: number;
   volunteer_limit: number;
-  deadline: Date | "";
+  deadline: string;
 }
 
 function Register_Body() {
@@ -51,15 +51,17 @@ function Register_Body() {
       },
       data: {
         title: "title tett",
+        type: 1, //1 = volunteer, 2 customer
         detail: "detail test",
         location: "location test",
         address: "address test",
-        address_detail: "addresss detail",
+        address_detail: "address detail",
         category: "category test",
-        due_date: "2023-10-11",
+        due_date: "2023-12-20",
         customer_limit: 1,
         volunteer_limit: 1,
-        deadline: "2023-10-11",
+        deadline: "2023-12-30",
+        photo: [],
       },
     });
     console.log(data.data);

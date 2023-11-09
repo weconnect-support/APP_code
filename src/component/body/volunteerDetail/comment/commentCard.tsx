@@ -32,6 +32,14 @@ const CommentCard = ({ comment, idx }: CommentCardProps) => {
     }
   }, []);
 
+  function formatDate(date: string) {
+    const year = date.slice(0, 4);
+    const month = date.slice(5, 7);
+    const day = date.slice(8, 10);
+
+    return `${year}-${month}-${day}`;
+  }
+
   const DeleteConfirmMessage = () => {
     const deleteComment = async () => {
       let config = {
@@ -234,7 +242,7 @@ const CommentCard = ({ comment, idx }: CommentCardProps) => {
       <div className="user">
         <FontAwesomeIcon id="thumnail" icon={faCircleUser}></FontAwesomeIcon>
         <div id="userName">{comment.name} </div>
-        <div id="createDate">2023.10.30</div>
+        <div id="createDate">{formatDate(comment.created_at)}</div>
         <FontAwesomeIcon
           className={`${idxEqual ? "" : "disabled"} ${
             editing ? "disabled" : ""
