@@ -233,7 +233,9 @@ const Volunteer_Detail = ({ idx }: propsType) => {
               alignItems: "center",
               width: "100%",
             }}
-            onClick={() => {}}
+            onClick={() => {
+              navigate(`./edit`);
+            }}
           >
             내용 수정하기
           </p>
