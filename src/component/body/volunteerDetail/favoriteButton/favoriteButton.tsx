@@ -24,7 +24,7 @@ const FavoriteButton = ( {idx} : FavoriteButtonProps) => {
 
     const deleteWish = async() => {
         let config = {
-            method: "POST",
+            method: "DELETE",
             url: `https://api-dev.weconnect.support/volunteer/${idx}/wishlist`,
             headers: {
                 Authorization: localStorage.getItem("jwt-token"),
@@ -43,8 +43,8 @@ const FavoriteButton = ( {idx} : FavoriteButtonProps) => {
     }
 
     return (
-        <Button type="text" icon={isLiked ? <HeartFilled /> : <HeartOutlined />} onClick={handleClick}>
-            {isLiked ? '좋아요 취소' : '좋아요'}
+        <Button type="text" icon={isLiked ? <HeartFilled /> : <HeartOutlined />} onClick={handleClick} style={{position: "fixed", top:"33vh", right:"0.5rem"}}>
+            {/* {isLiked ? '북마크 취소' : '북마크'} */}
         </Button>
     );
 };
