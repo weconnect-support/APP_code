@@ -24,6 +24,7 @@ function List_Body() {
       },
     });
     console.log(data.data.data);
+    setList(data.data.data)
   };
   return (
     <Body_List>
@@ -43,12 +44,9 @@ function List_Body() {
       >
         활동 등록하기
       </button>
-      <ListCard />
-      <ListCard />
-      <ListCard />
-      <ListCard />
-      <ListCard />
-      <ListCard />
+      {list.map((item, index) => (
+        <ListCard data={item} />
+      ))}
     </Body_List>
   );
 }
