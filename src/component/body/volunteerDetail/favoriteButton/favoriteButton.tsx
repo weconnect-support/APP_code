@@ -43,7 +43,7 @@ const FavoriteButton = ( {idx} : FavoriteButtonProps) => {
     }
 
     return (
-        <Button type="text" icon={isLiked ? <HeartFilled /> : <HeartOutlined />} onClick={handleClick} style={{position: "fixed", top:"33vh", right:"0.5rem"}}>
+        <Button type="text" icon={isLiked ? <HeartFilled /> : <HeartOutlined />} onClick={handleClick} style={{position: "relative", top:"85%", left:"88%"}}>
             {/* {isLiked ? '북마크 취소' : '북마크'} */}
         </Button>
     );

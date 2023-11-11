@@ -11,6 +11,7 @@ import UserDetail from "./layout/userDetail";
 import Register from "./layout/register";
 import VolDetail from "./layout/volunteerDetail";
 import VolunteerEdit from "./layout/volunteerEdit";
+import WishList from "./layout/wishList";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/volunteer/:idx" element={<VolDetail />}></Route>
         <Route path="/volunteer/:idx/edit" element={<VolunteerEdit />}></Route>
+        <Route path="/volunteer/wishList" element={<WishList/>}></Route>
       </Routes>
     </Stack>
   );
