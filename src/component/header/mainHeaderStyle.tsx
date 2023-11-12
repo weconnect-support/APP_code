@@ -8,8 +8,7 @@ const Headerbox = styled.div<{ isVisible: boolean; windowWidth: number }>`
   justify-content: space-between;
   align-items: center;
   color: black;
-  position: relative; /* 부모 컨테이너에 relative 설정 */
-
+  position: relative;
   .headerMenuList {
     margin-top: auto;
     margin-bottom: auto;
@@ -22,8 +21,7 @@ const Headerbox = styled.div<{ isVisible: boolean; windowWidth: number }>`
   }
 
   .loGo {
-    width: ${(props) =>
-      props.windowWidth <= 768 ? null : "65%"}; /* 동적으로 너비 설정 */
+    width: ${(props) => (props.windowWidth <= 768 ? null : "65%")};
     display: flex;
     align-items: center;
     justify-content: flex-start;
