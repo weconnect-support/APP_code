@@ -374,6 +374,7 @@ const Volunteer_Detail = ({ idx }: propsType) => {
         <div>활동 내용</div>
         <div id="detail">{volIdxData.volunteer.detail}</div>
       </div>
+
       <div className="comment">
         <div id="enterComment">
           <TextareaAutosize
