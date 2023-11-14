@@ -11,6 +11,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { useNavigate } from "react-router-dom";
 import CommentCard from "./comment/commentCard";
 import Modal from "react-modal";
+import FavoriteButton from "./favoriteButton/favoriteButton";
 
 interface propsType {
   idx: string;
@@ -360,7 +361,9 @@ const Volunteer_Detail = ({ idx }: propsType) => {
         <PopupMessage />
         <DeleteConfirmMessage />
       </div>
-      <div id="image"></div>
+      <div id="image">
+        <FavoriteButton idx={idx}/>
+      </div>
       <div className="info">
         <div id="address">{volIdxData.volunteer.address}</div>
         <div id="title">{volIdxData.volunteer.name}</div>

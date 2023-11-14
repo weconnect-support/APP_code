@@ -7,13 +7,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import FindLocationCard from "./body_component/locationcard";
 import { Link, Route, Routes } from "react-router-dom";
+import { HeartFilled } from '@ant-design/icons';
+import { Button } from 'antd';
+import { useNavigate } from "react-router";
 
 function Main_Body() {
+  const navigate = useNavigate();
   return (
     <Body_Main>
-      <div>
-        <h2>안녕하세요, 홍길동님</h2>
-        <h2> 오늘도 따듯한 하루가 되세요</h2>
+      <div style={{display: "flex", justifyContent: "spaceBetween", alignItems: "center", width:"100%"}}>
+        <div style={{width:"70%"}}>
+          <h2>안녕하세요, 홍길동님</h2>
+          <h2> 오늘도 따듯한 하루가 되세요</h2>
+        </div>  
+        <Button icon={<HeartFilled/>} onClick={() => navigate('/volunteer/wishList')}>찜목록</Button>
       </div>
       <br />
       <div className="findPeople">
