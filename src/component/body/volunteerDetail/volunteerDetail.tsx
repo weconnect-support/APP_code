@@ -13,8 +13,12 @@ import CommentCard from "./comment/commentCard";
 import Modal from "react-modal";
 import FavoriteButton from "./favoriteButton/favoriteButton";
 
+import { VolunteerData } from "./../../../layout/volunteerDetail";
+
 interface propsType {
   idx: string;
+  volIdxData: VolunteerData;
+  isMaker: boolean;
 }
 
 export interface comment {
@@ -30,118 +34,11 @@ export interface comment {
   user_idx: number;
   volunteer_idx: number;
 }
-
-interface FormData {
-  comments: comment[];
-  current_customer: number;
-  current_volunteer: number;
-  customers: [];
-  volunteers: [];
-  volunteer: {
-    address: string;
-    address_detail: string;
-    category: string;
-    customer_limit: number;
-    deadline: string;
-    due_date: string;
-    last_modify_time: string;
-    detail: string;
-    email: string;
-    idx: string;
-    location: string;
-    name: string;
-    nickname: string;
-    title: string;
-    user_idx: number;
-    volunteer_limit: number;
-  };
-}
-
-const Volunteer_Detail = ({ idx }: propsType) => {
-  const [volIdxData, setVolIdxData] = useState<FormData>({
-    comments: [],
-    current_customer: 0,
-    current_volunteer: 0,
-    customers: [],
-    volunteers: [],
-    volunteer: {
-      address: "",
-      address_detail: "",
-      category: "",
-      customer_limit: 0,
-      deadline: "",
-      detail: "",
-      due_date: "",
-      email: "",
-      idx: "",
-      last_modify_time: "",
-      location: "",
-      name: "",
-      nickname: "",
-      title: "",
-      user_idx: 0,
-      volunteer_limit: 0,
-    },
-  });
+const Volunteer_Detail = ({ idx, volIdxData, isMaker }: propsType) => {
   const [enterComment, setEnterComment] = useState("");
-  const [isExtraOption, setIsExtraOption] = useState(false);
   const [isExtraOptionOpen, setIsExtraOptionOpen] = useState(false);
   const [checkDeleteOption, setCheckDeleteOption] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getVolIdx(Number(idx));
-  }, []);
-
-  function formatDate(date: string) {
-    const year = date.slice(0, 4);
-    const month = date.slice(5, 7);
-    const day = date.slice(8, 10);
-
-    return `${year}-${month}-${day}`;
-  }
-
-  const getVolIdx = async (idx: number) => {
-    let data = await axios({
-      method: "GET",
-      url: `https://api-dev.weconnect.support/volunteer/${idx}`,
-      headers: { authorization: localStorage.getItem("jwt-token") },
-    });
-    console.log(data.data.data);
-
-    if (
-      data.data.data.volunteer.user_idx ===
-      Number(localStorage.getItem("user-idx"))
-    ) {
-      setIsExtraOption(true);
-    }
-
-    await setVolIdxData({
-      comments: data.data.data.comments,
-      current_customer: data.data.data.current_customer,
-      current_volunteer: data.data.data.current_volunteer,
-      customers: data.data.data.customers,
-      volunteers: data.data.data.volunteers,
-      volunteer: {
-        address: data.data.data.volunteer.address,
-        address_detail: data.data.data.volunteer.address_detail,
-        category: data.data.data.volunteer.category,
-        customer_limit: data.data.data.volunteer.customer_limit,
-        deadline: formatDate(data.data.data.volunteer.deadline),
-        detail: data.data.data.volunteer.detail,
-        due_date: formatDate(data.data.data.volunteer.due_date),
-        email: data.data.data.volunteer.email,
-        idx: data.data.data.volunteer.idx,
-        last_modify_time: formatDate(data.data.data.volunteer.last_modify_time),
-        location: data.data.data.volunteer.location,
-        name: data.data.data.volunteer.name,
-        nickname: data.data.data.volunteer.nickname,
-        title: data.data.data.volunteer.title,
-        user_idx: data.data.data.volunteer.user_idx,
-        volunteer_limit: data.data.data.volunteer.volunteer_limit,
-      },
-    });
-  };
 
   const goBack = () => {
     navigate(-1);
@@ -352,7 +249,7 @@ const Volunteer_Detail = ({ idx }: propsType) => {
           icon={faArrowLeft}
         />
         <FontAwesomeIcon
-          className={`extra ${isExtraOption ? "" : "disabled"}`}
+          className={`extra ${isMaker ? "" : "disabled"}`}
           onClick={() => {
             setIsExtraOptionOpen(true);
           }}
@@ -362,7 +259,7 @@ const Volunteer_Detail = ({ idx }: propsType) => {
         <DeleteConfirmMessage />
       </div>
       <div id="image">
-        <FavoriteButton idx={idx}/>
+        <FavoriteButton idx={idx} />
       </div>
       <div className="info">
         <div id="address">{volIdxData.volunteer.address}</div>
