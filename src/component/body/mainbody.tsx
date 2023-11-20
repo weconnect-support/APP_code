@@ -7,48 +7,77 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import FindLocationCard from "./body_component/locationcard";
 import { Link, Route, Routes } from "react-router-dom";
-import { HeartFilled } from '@ant-design/icons';
-import { Button } from 'antd';
+import { HeartFilled } from "@ant-design/icons";
+import { Button } from "antd";
 import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Main_Body() {
   const navigate = useNavigate();
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    getVolunteerInfo();
+  }, []);
+  const getVolunteerInfo = async () => {
+    let data = await axios({
+      method: "GET",
+      url: "https://api-dev.weconnect.support/volunteer",
+      headers: {
+        Authorization: localStorage.getItem("jwt-token"),
+      },
+    });
+    console.log(data.data);
+    setList(data.data.data.slice(0, 10));
+  };
+
+  console.log(list);
+
   return (
     <Body_Main>
-      <div style={{display: "flex", justifyContent: "spaceBetween", alignItems: "center", width:"100%"}}>
-        <div style={{width:"70%"}}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "spaceBetween",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <div style={{ width: "70%" }}>
           <h2>안녕하세요, 홍길동님</h2>
           <h2> 오늘도 따듯한 하루가 되세요</h2>
-        </div>  
-        <Button icon={<HeartFilled/>} onClick={() => navigate('/volunteer/wishList')}>찜목록</Button>
+        </div>
+        <Button
+          icon={<HeartFilled />}
+          onClick={() => navigate("/volunteer/wishList")}
+        >
+          찜목록
+        </Button>
       </div>
       <br />
       <div className="findPeople">
         <div>봉사자를 찾습니다.</div>
         <Link to="/List" style={{ textDecoration: "none" }}>
-          <p style={{paddingRight: "1rem"}}>전체보기 +</p>
+          <p style={{ paddingRight: "1rem" }}>전체보기 +</p>
         </Link>
       </div>
       <div className="findCardList">
-        <MessageCard />
-        <MessageCard />
-        <MessageCard />
-        <MessageCard />
-        <MessageCard />
+        {list.map((item, index) => (
+          <MessageCard data={item} type="volunteer" />
+        ))}
       </div>
 
       <div className="findvolunteer">
         <div>봉사활동을 찾습니다.</div>
         <Link to="/List" style={{ textDecoration: "none" }}>
-          <p style={{paddingRight: "1rem"}}>전체보기 +</p>
+          <p style={{ paddingRight: "1rem" }}>전체보기 +</p>
         </Link>
       </div>
       <div className="findCardList">
-        <MessageCard />
-        <MessageCard />
-        <MessageCard />
-        <MessageCard />
-        <MessageCard />
+        {list.map((item, index) => (
+          <MessageCard data={item} type="customer" />
+        ))}
       </div>
 
       <div className="searchCategory">

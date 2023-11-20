@@ -5,7 +5,6 @@ const Card = styled.div`
   width: 100%;
   justify-content: space-around;
   background-color: white;
-  padding: 0.5rem;
   border-radius: 1rem;
   margin: 0.1rem 0 0.1rem 0;
   li {
@@ -22,6 +21,7 @@ const Card = styled.div`
     background-color: black;
     width: 35%;
     border-radius: 1rem;
+    margin: 0.5rem;
   }
   .icon {
     font-size: 1.5rem;
