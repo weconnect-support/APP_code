@@ -1,6 +1,6 @@
 import Body_Detail from "./registerBody_Style";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import Body_Register from "./registerBody_Style";
 
@@ -18,6 +18,7 @@ interface FormData {
 }
 
 function Register_Body() {
+  const navigate = useNavigate();
   const [registerData, setRegisterData] = useState<FormData>({
     title: "",
     detail: "",
@@ -31,6 +32,57 @@ function Register_Body() {
     deadline: "",
   });
 
+  const useDetectClose = (ref: any, initialState: any) => {
+    const [isOpen, setIsOpen] = useState(initialState);
+    useEffect(() => {
+      const pageClickEvent = (e: any) => {
+        if (ref.current && !ref.current.contains(e.target)) {
+          setIsOpen(!isOpen);
+        }
+      };
+      if (isOpen) {
+        window.addEventListener("click", pageClickEvent);
+      }
+      return () => {
+        window.removeEventListener("click", pageClickEvent);
+      };
+    }, [isOpen, ref]);
+    return [isOpen, setIsOpen];
+  };
+
+  const CategoryDropDown = ({
+    value,
+    setCategoryName,
+    setIsOpen,
+    isOpen,
+  }: any) => {
+    const ValueClick = () => {
+      setRegisterData({ ...registerData, category: value });
+      setCategoryName(value);
+      setIsOpen(!isOpen);
+    };
+    return <li onClick={ValueClick}>{value}</li>;
+  };
+
+  const dropDownRef = useRef(null);
+  const [categoryOption, setCategoryName] = useState("항목을 선택해 주세요!");
+  const phoneList = [
+    "음악",
+    "언어",
+    "프로그래밍",
+    "요리",
+    "미술",
+    "사진",
+    "댄스",
+    "체육",
+    "과학 실험",
+    "공예",
+    "지식",
+    "문화(외국)",
+  ];
+
+  const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setRegisterData({ ...registerData, [name]: value });
@@ -42,29 +94,33 @@ function Register_Body() {
   const submitRegister = async (e: any) => {
     e.preventDefault();
     console.log(registerData);
-
-    let data = await axios({
-      method: "POST",
-      url: "https://api-dev.weconnect.support/volunteer",
-      headers: {
-        Authorization: localStorage.getItem("jwt-token"),
-      },
-      data: {
-        title: "title tett",
-        type: 1, //1 = volunteer, 2 customer
-        detail: "detail test",
-        location: "location test",
-        address: "address test",
-        address_detail: "address detail",
-        category: "category test",
-        due_date: "2023-12-20",
-        customer_limit: 1,
-        volunteer_limit: 1,
-        deadline: "2023-12-30",
-        photo: [],
-      },
-    });
-    console.log(data.data);
+    if (registerData.category === "항목을 선택해 주세요!") {
+      alert("카테고리를 선택해주세요!");
+    } else {
+      let data = await axios({
+        method: "POST",
+        url: "https://api-dev.weconnect.support/volunteer",
+        headers: {
+          Authorization: localStorage.getItem("jwt-token"),
+        },
+        data: {
+          title: registerData.title,
+          type: 1, //1 = volunteer, 2 customer
+          detail: registerData.detail,
+          location: registerData.location,
+          address: registerData.address,
+          address_detail: registerData.address_detail,
+          category: registerData.category,
+          due_date: registerData.due_date,
+          customer_limit: registerData.customer_limit,
+          volunteer_limit: registerData.volunteer_limit,
+          deadline: registerData.deadline,
+          photo: [],
+        },
+      });
+      console.log(data.data);
+      navigate("/");
+    }
   };
 
   return (
@@ -129,14 +185,25 @@ function Register_Body() {
           />
         </div>
         <label className="form-label">카테고리</label>
-        <div className="inputWrap">
+        <div className="categorySelect" ref={dropDownRef}>
           <input
-            type="text"
-            className="input"
-            name="category"
-            placeholder="ex) 교육"
-            onChange={handleChange}
+            onClick={() => setIsOpen(!isOpen)}
+            type="button"
+            value={categoryOption}
           />
+          {isOpen && (
+            <ul>
+              {phoneList.map((value, index) => (
+                <CategoryDropDown
+                  key={index}
+                  value={value}
+                  setIsOpen={setIsOpen}
+                  setCategoryName={setCategoryName}
+                  isOpen={isOpen}
+                />
+              ))}
+            </ul>
+          )}
         </div>
         <label className="form-label">활동일자</label>
         <div className="inputWrap">

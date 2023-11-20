@@ -28,23 +28,20 @@ const GoogleLogin_Button = (props: any) => {
       method: "POST",
       data: {
         access_token: res.accessToken,
-        platform: 1, // 1 google, 2 kakao, 3 naver
+        platform: 1,
       },
     });
 
     if (token_data.data.text === "login fail") {
-      console.log("hi");
       navigate("../signup", { state: { platform, token } });
     } else {
-      console.log(token_data.data);
-      await localStorage.setItem("jwt-token", token_data.data.token);
-
+      //console.log(JSON.parse(atob(token_data.data.token.split(".")[1])));
       let user_data = await axios({
         url: "https://api-dev.weconnect.support/users",
         method: "GET",
         headers: { authorization: token_data.data.token },
       });
-      await localStorage.setItem("user-idx", user_data.data.userInfo.idx);
+      localStorage.setItem("user-idx", user_data.data.userInfo.idx);
       navigate("/");
     }
   };
