@@ -25,7 +25,6 @@ const Headerbox = styled.div<{ isVisible: boolean; windowWidth: number }>`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    font-size: 1.5rem;
     padding: 1rem 1rem;
     cursor: pointer;
   }

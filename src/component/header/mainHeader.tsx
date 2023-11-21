@@ -71,7 +71,7 @@ function MainHeader() {
     <Header_box isVisible={usertoggled} windowWidth={windowWidth}>
       {/*왼쪽 메뉴바*/}
       <div className="loGo" onClick={gohome}>
-        SSang
+        <img className="logo" src="icon/logo1.png" style={{height: "2rem"}}/>
       </div>
       {/*user 버튼*/}
       <div className="userIcon" onClick={userClick}>

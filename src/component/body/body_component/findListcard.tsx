@@ -42,7 +42,9 @@ const ListCard = (props: {data:Data}) => {
           ></FontAwesomeIcon>
         </div>
       </ul>
-      <div className="thumbNail"></div>
+      <div className="thumbNail" style={{width:"20%", overflow:"hidden"}} >
+        <img src="icons/logo1.png" style={{width:"100%", height:"100%", objectFit:"scale-down"}}/>
+      </div>
     </Card>
   );
 }
