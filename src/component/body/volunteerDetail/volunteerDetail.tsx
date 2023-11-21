@@ -39,12 +39,10 @@ const Volunteer_Detail = ({ idx, volIdxData, isMaker }: propsType) => {
   const [isExtraOptionOpen, setIsExtraOptionOpen] = useState(false);
   const [checkDeleteOption, setCheckDeleteOption] = useState(false);
   const navigate = useNavigate();
-
   const goBack = () => {
     navigate(-1);
   };
   const gologin = () => {};
-
   const textAreaChange = (e: any) => {
     setEnterComment(e.target.value);
   };
@@ -257,8 +255,9 @@ const Volunteer_Detail = ({ idx, volIdxData, isMaker }: propsType) => {
         ></FontAwesomeIcon>
         <PopupMessage />
         <DeleteConfirmMessage />
-      </div>
+      </div>  
       <div id="image">
+        <img src={"https://api-dev.weconnect.support/img/"+volIdxData.volunteer.img} style={{width:"100%", height:"100%", objectFit:"scale-down"}}/>
         <FavoriteButton idx={idx} />
       </div>
       <div className="info">

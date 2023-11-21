@@ -12,6 +12,7 @@ interface Data {
   current_volunteer: number;
   customer_limit: number;
   volunteer_limit: number;
+  img: string;
 }
 
 const ListCard = (props: { data: Data }) => {
@@ -24,6 +25,7 @@ const ListCard = (props: { data: Data }) => {
     current_volunteer,
     customer_limit,
     volunteer_limit,
+    img
   } = props.data;
   return (
     <Card>
@@ -60,7 +62,7 @@ const ListCard = (props: { data: Data }) => {
         </div>
       </ul>
       <div className="thumbNail" style={{width:"20%", overflow:"hidden"}} >
-        <img src="icons/logo1.png" style={{width:"100%", height:"100%", objectFit:"scale-down"}}/>
+        <img src={"https://api-dev.weconnect.support/img/"+img} style={{width:"100%", height:"100%", objectFit:"scale-down"}}/>
       </div>
     </Card>
   );
