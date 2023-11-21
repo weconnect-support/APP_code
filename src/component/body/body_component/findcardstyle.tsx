@@ -4,7 +4,7 @@ const Card = styled.div`
   display: flex;
   justify-content: space-around;
   background-color: white;
-  width: 24rem;
+  width: 20rem;
   padding: 0.5rem;
   border-radius: 1rem;
   margin: 1rem;
@@ -14,13 +14,12 @@ const Card = styled.div`
     margin: 0 0 10px 0;
   }
   ul {
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 1rem 0 1rem 0;
     margin: 0;
   }
   .thumbNail {
-    margin: 0 0.7rem 0 0;
     background-color: black;
-    width: 100px;
+    width: 7rem;
     border-radius: 1rem;
   }
   .icon {
