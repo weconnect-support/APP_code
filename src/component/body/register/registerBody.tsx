@@ -31,6 +31,20 @@ function Register_Body() {
     volunteer_limit: 0,
     deadline: "",
   });
+  const value = [
+    { value: "음악", name: "music" },
+    { value: "언어", name: "language" },
+    { value: "프로그래밍", name: "programming" },
+    { value: "요리", name: "cooking" },
+    { value: "미술", name: "art" },
+    { value: "사진", name: "photograph" },
+    { value: "댄스", name: "dance" },
+    { value: "체육", name: "physicalActivity" },
+    { value: "과학 실험", name: "scienceExperiment" },
+    { value: "공예", name: "crafts" },
+    { value: "지식", name: "knowledge" },
+    { value: "문화(외국)", name: "culture" },
+  ];
 
   const useDetectClose = (ref: any, initialState: any) => {
     const [isOpen, setIsOpen] = useState(initialState);
@@ -57,29 +71,15 @@ function Register_Body() {
     isOpen,
   }: any) => {
     const ValueClick = () => {
-      setRegisterData({ ...registerData, category: value });
-      setCategoryName(value);
+      setRegisterData({ ...registerData, category: value.name });
+      setCategoryName(value.value);
       setIsOpen(!isOpen);
     };
-    return <li onClick={ValueClick}>{value}</li>;
+    return <li onClick={ValueClick}>{value.value}</li>;
   };
 
   const dropDownRef = useRef(null);
   const [categoryOption, setCategoryName] = useState("항목을 선택해 주세요!");
-  const phoneList = [
-    "음악",
-    "언어",
-    "프로그래밍",
-    "요리",
-    "미술",
-    "사진",
-    "댄스",
-    "체육",
-    "과학 실험",
-    "공예",
-    "지식",
-    "문화(외국)",
-  ];
 
   const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
 
@@ -193,10 +193,10 @@ function Register_Body() {
           />
           {isOpen && (
             <ul>
-              {phoneList.map((value, index) => (
+              {value.map((item, index) => (
                 <CategoryDropDown
                   key={index}
-                  value={value}
+                  value={item}
                   setIsOpen={setIsOpen}
                   setCategoryName={setCategoryName}
                   isOpen={isOpen}

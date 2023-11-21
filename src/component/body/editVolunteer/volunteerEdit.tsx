@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { time } from "console";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router";
 import Body_Register from "./volunteerEditStyle";
@@ -19,7 +20,7 @@ interface FormData {
 }
 
 function EditBody() {
-  const [eidtData, seteidtData] = useState<FormData>({
+  const [editData, seteditData] = useState<FormData>({
     title: "",
     detail: "",
     location: "",
@@ -34,6 +35,22 @@ function EditBody() {
   });
   const { idx } = useParams();
   const navigate = useNavigate();
+  const value = [
+    { value: "음악", name: "music" },
+    { value: "언어", name: "language" },
+    { value: "프로그래밍", name: "programming" },
+    { value: "요리", name: "cooking" },
+    { value: "미술", name: "art" },
+    { value: "사진", name: "photograph" },
+    { value: "댄스", name: "dance" },
+    { value: "체육", name: "physicalActivity" },
+    { value: "과학 실험", name: "scienceExperiment" },
+    { value: "공예", name: "crafts" },
+    { value: "지식", name: "knowledge" },
+    { value: "문화(외국)", name: "culture" },
+  ];
+  const dropDownRef = useRef(null);
+  const [categoryOption, setCategoryName] = useState("");
 
   useEffect(() => {
     getVolData();
@@ -54,7 +71,7 @@ function EditBody() {
       headers: { authorization: localStorage.getItem("jwt-token") },
     });
 
-    await seteidtData({
+    seteditData({
       title: data.data.data.volunteer.title,
       detail: data.data.data.volunteer.detail,
       location: data.data.data.volunteer.location,
@@ -67,15 +84,21 @@ function EditBody() {
       deadline: formatDate(data.data.data.volunteer.deadline),
       is_dead: 0,
     });
+    const categoryItem = value.find(
+      (item) => item.name === data.data.data.volunteer.category
+    );
+    if (categoryItem) {
+      setCategoryName(categoryItem.value);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    seteidtData({ ...eidtData, [name]: value });
+    seteditData({ ...editData, [name]: value });
   };
   const handleChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    seteidtData({ ...eidtData, [name]: value });
+    seteditData({ ...editData, [name]: value });
   };
   const submitRegister = async (e: any) => {
     let data = await axios({
@@ -84,11 +107,44 @@ function EditBody() {
       headers: {
         Authorization: localStorage.getItem("jwt-token"),
       },
-      data: eidtData,
+      data: editData,
     });
     console.log(data.data);
     navigate(`/volunteer/${idx}`);
   };
+
+  const useDetectClose = (ref: any, initialState: any) => {
+    const [isOpen, setIsOpen] = useState(initialState);
+    useEffect(() => {
+      const pageClickEvent = (e: any) => {
+        if (ref.current && !ref.current.contains(e.target)) {
+          setIsOpen(!isOpen);
+        }
+      };
+      if (isOpen) {
+        window.addEventListener("click", pageClickEvent);
+      }
+      return () => {
+        window.removeEventListener("click", pageClickEvent);
+      };
+    }, [isOpen, ref]);
+    return [isOpen, setIsOpen];
+  };
+
+  const CategoryDropDown = ({
+    value,
+    setCategoryName,
+    setIsOpen,
+    isOpen,
+  }: any) => {
+    const ValueClick = () => {
+      seteditData({ ...editData, category: value.name });
+      setCategoryName(value.value);
+      setIsOpen(!isOpen);
+    };
+    return <li onClick={ValueClick}>{value.value}</li>;
+  };
+  const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
 
   return (
     <Body_Register>
@@ -104,7 +160,7 @@ function EditBody() {
           className="input"
           name="title"
           placeholder="ex) 영어 기초"
-          value={eidtData.title}
+          value={editData.title}
           onChange={handleChange}
         />
       </div>
@@ -118,7 +174,7 @@ function EditBody() {
             paddingBottom: "3rem",
           }}
           placeholder="ex) 영어 알파벳마다 발음을 공부해봐요!"
-          value={eidtData.detail}
+          value={editData.detail}
           onChange={handleChangeText}
         />
       </div>
@@ -129,7 +185,7 @@ function EditBody() {
           className="input"
           name="location"
           placeholder="ex) 아주대 앞 카페"
-          value={eidtData.location}
+          value={editData.location}
           onChange={handleChange}
         />
       </div>
@@ -140,7 +196,7 @@ function EditBody() {
           className="input"
           name="address"
           placeholder="ex) 경기도 수원시"
-          value={eidtData.address}
+          value={editData.address}
           onChange={handleChange}
         />
       </div>
@@ -151,20 +207,30 @@ function EditBody() {
           className="input"
           name="address_detail"
           placeholder="ex) 월드컵로 206"
-          value={eidtData.address_detail}
+          value={editData.address_detail}
           onChange={handleChange}
         />
       </div>
       <label className="form-label">카테고리</label>
-      <div className="inputWrap">
+      <div className="categorySelect" ref={dropDownRef}>
         <input
-          type="text"
-          className="input"
-          name="category"
-          placeholder="ex) 교육"
-          value={eidtData.category}
-          onChange={handleChange}
+          onClick={() => setIsOpen(!isOpen)}
+          type="button"
+          value={categoryOption}
         />
+        {isOpen && (
+          <ul>
+            {value.map((item, index) => (
+              <CategoryDropDown
+                key={index}
+                value={item}
+                setIsOpen={setIsOpen}
+                setCategoryName={setCategoryName}
+                isOpen={isOpen}
+              />
+            ))}
+          </ul>
+        )}
       </div>
       <label className="form-label">활동일자</label>
       <div className="inputWrap">
@@ -173,7 +239,7 @@ function EditBody() {
           className="input"
           name="due_date"
           placeholder="ex) 2023-12-14"
-          value={eidtData.due_date}
+          value={editData.due_date}
           onChange={handleChange}
         />
       </div>
@@ -184,7 +250,7 @@ function EditBody() {
           className="input"
           name="volunteer_limit"
           placeholder="ex) 4"
-          value={eidtData.volunteer_limit}
+          value={editData.volunteer_limit}
           onChange={handleChange}
         />
       </div>
@@ -195,7 +261,7 @@ function EditBody() {
           className="input"
           name="customer_limit"
           placeholder="ex) 12"
-          value={eidtData.customer_limit}
+          value={editData.customer_limit}
           onChange={handleChange}
         />
       </div>
@@ -206,7 +272,7 @@ function EditBody() {
           className="input"
           name="deadline"
           placeholder="ex) 2023-12-14"
-          value={eidtData.deadline}
+          value={editData.deadline}
           onChange={handleChange}
         />
       </div>
