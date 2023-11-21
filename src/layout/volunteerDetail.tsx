@@ -30,6 +30,7 @@ export interface VolunteerData {
     title: string;
     user_idx: number;
     volunteer_limit: number;
+    img: string;
   };
 }
 
@@ -57,6 +58,7 @@ function VolDetail() {
       title: "",
       user_idx: 0,
       volunteer_limit: 0,
+      img: "",
     },
   });
   const [isMaker, setIsMaker] = useState(false);
@@ -106,6 +108,7 @@ function VolDetail() {
         title: data.data.data.volunteer.title,
         user_idx: data.data.data.volunteer.user_idx,
         volunteer_limit: data.data.data.volunteer.volunteer_limit,
+        img: data.data.data.volunteer.img,
       },
     });
     if (
