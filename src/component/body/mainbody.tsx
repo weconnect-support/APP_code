@@ -49,7 +49,7 @@ function Main_Body() {
           <h2> 오늘도 따듯한 하루가 되세요</h2>
         </div>
         <Button
-          icon={<HeartFilled />}
+          icon={<HeartFilled style={{color:"#ff4471"}} />}
           onClick={() => navigate("/volunteer/wishList")}
         >
           찜목록

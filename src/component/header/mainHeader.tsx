@@ -86,11 +86,11 @@ function MainHeader() {
           icon={faUser}
           onClick={gologin}
         ></FontAwesomeIcon>
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           className="detail"
           icon={faUbuntu}
           onClick={goDetail}
-        ></FontAwesomeIcon>
+        ></FontAwesomeIcon> */}
       </div>
     </Header_box>
   );

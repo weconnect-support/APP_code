@@ -63,7 +63,7 @@ const ListCard = (props: { data: Data }) => {
       </ul>
       <div className="thumbNail" style={{width:"20%", overflow:"hidden"}} >
         <img src={"https://api-dev.weconnect.support/img/"+img} style={{width:"100%", height:"100%", objectFit:"scale-down"}}/>
-      </div>
+      </div>  
     </Card>
   );
 };

@@ -12,6 +12,7 @@ import Register from "./layout/register";
 import VolDetail from "./layout/volunteerDetail";
 import VolunteerEdit from "./layout/volunteerEdit";
 import WishList from "./layout/wishList";
+import GlobalStyle from './App_style';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       sx={{ overflowY: "auto", touchAction: "none", userSelect: "none" }}
     >
       <Reset />
+      <GlobalStyle />
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/login" element={<Login />}></Route>

@@ -33,7 +33,7 @@ const Headerbox = styled.div<{ isVisible: boolean; windowWidth: number }>`
   }
   .userIcon {
     font-size: 1.5rem;
-    padding: 1rem 1rem;
+    padding: .5rem .5rem;
   }
 
   .inputBar {
