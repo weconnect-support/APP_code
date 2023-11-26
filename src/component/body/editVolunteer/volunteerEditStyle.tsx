@@ -29,6 +29,42 @@ const Body_Register = styled.div`
     background-color: white;
     border: 1px solid #e2e2e2;
   }
+  .categorySelect {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    background-color: white;
+    border: 1px solid #e2e2e2;
+  }
+  .categorySelect input {
+    height: 3rem;
+    width: 100%;
+    border-radius: 1rem;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2rem;
+    background-color: white;
+  }
+  .categorySelect ul {
+    display: flex;
+    top: 3.5rem;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    height: 8rem;
+    position: absolute;
+    background-color: white;
+    overflow: scroll;
+    border-radius: 1rem;
+  }
+  .categorySelect li {
+    font-size: 1.2rem;
+    margin: 0.5rem 0 0.5rem 0;
+  }
   .inputWrap.disabled .input {
     background-color: #e2e2e2;
   }

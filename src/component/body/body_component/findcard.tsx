@@ -54,12 +54,12 @@ function MessageCard(props: { data: Data; type: string }) {
   }
 
   return (
-    <div
-      onClick={() => {
-        navigate(`/volunteer/${idx}`);
-      }}
-    >
-      <Card>
+    <div>
+      <Card
+        onClick={() => {
+          navigate(`/volunteer/${idx}`);
+        }}
+      >
         <ul>
           <li id="date"> ~ {due_date.substring(0, due_date.indexOf("T"))}</li>
           <li id="title">{title}</li>
