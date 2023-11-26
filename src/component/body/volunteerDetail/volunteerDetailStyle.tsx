@@ -33,8 +33,8 @@ const VolDetail_Body = styled.div`
     cursor: pointer;
   }
   #image {
-    margin: -5rem 0 0 0;
-    background-color: red;
+    margin: 0.2rem 0 0 0;
+    background-color: white;
     width: 100%;
     height: 40vh;
   }

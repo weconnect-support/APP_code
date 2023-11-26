@@ -18,7 +18,7 @@ const Card = styled.div`
     margin: 0;
   }
   .thumbNail {
-    background-color: black;
+    background-color: white;
     width: 7rem;
     border-radius: 1rem;
   }

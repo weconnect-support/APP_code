@@ -19,7 +19,22 @@ function Main_Body() {
 
   useEffect(() => {
     getVolunteerInfo();
+    checkToken();
   }, []);
+
+  const checkToken = () => {
+    const token = localStorage.getItem("jwt-token");
+    if (token) {
+      const temp = JSON.parse(atob(token.split(".")[1]));
+      const expire = new Date(temp.expire);
+      const now = new Date();
+      console.log(now);
+      if (expire < now) {
+        localStorage.removeItem("jwt-token");
+        localStorage.removeItem("user-idx");
+      }
+    }
+  };
   const getVolunteerInfo = async () => {
     let data = await axios({
       method: "GET",
@@ -29,10 +44,11 @@ function Main_Body() {
       },
     });
     console.log(data.data);
+    if (data.data.code === 0) {
+      return;
+    }
     setList(data.data.data.slice(0, 10));
   };
-
-  console.log(list);
 
   return (
     <Body_Main>
@@ -49,7 +65,7 @@ function Main_Body() {
           <h2> 오늘도 따듯한 하루가 되세요</h2>
         </div>
         <Button
-          icon={<HeartFilled />}
+          icon={<HeartFilled style={{color:"#ff4471"}} />}
           onClick={() => navigate("/volunteer/wishList")}
         >
           찜목록

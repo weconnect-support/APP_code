@@ -13,6 +13,7 @@ interface Data {
   customer_limit: number;
   volunteer_limit: number;
   idx: number;
+  img: string
 }
 
 function MessageCard(props: { data: Data; type: string }) {
@@ -27,6 +28,7 @@ function MessageCard(props: { data: Data; type: string }) {
     customer_limit,
     volunteer_limit,
     idx,
+    img
   } = props.data;
 
   function CheckType() {
@@ -52,12 +54,12 @@ function MessageCard(props: { data: Data; type: string }) {
   }
 
   return (
-    <div
-      onClick={() => {
-        navigate(`/volunteer/${idx}`);
-      }}
-    >
-      <Card>
+    <div>
+      <Card
+        onClick={() => {
+          navigate(`/volunteer/${idx}`);
+        }}
+      >
         <ul>
           <li id="date"> ~ {due_date.substring(0, due_date.indexOf("T"))}</li>
           <li id="title">{title}</li>
@@ -82,7 +84,9 @@ function MessageCard(props: { data: Data; type: string }) {
             ></FontAwesomeIcon>
           </div>
         </ul>
-        <div className="thumbNail"></div>
+        <div className="thumbNail" style={{width:"20%", overflow:"hidden"}} >
+          <img src={"https://api-dev.weconnect.support/img/"+img} style={{width:"100%", height:"100%", objectFit:"scale-down"}}/>
+      </div>
       </Card>
     </div>
   );
