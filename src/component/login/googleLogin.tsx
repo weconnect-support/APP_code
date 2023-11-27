@@ -35,6 +35,7 @@ const GoogleLogin_Button = (props: any) => {
     if (token_data.data.text === "login fail") {
       navigate("../signup", { state: { platform, token } });
     } else {
+      await localStorage.setItem("jwt-token", token_data.data.token);
       let user_data = await axios({
         url: "https://api-dev.weconnect.support/users",
         method: "GET",
