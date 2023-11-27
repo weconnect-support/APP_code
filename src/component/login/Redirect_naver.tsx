@@ -14,7 +14,7 @@ function RedirectNaver() {
       const token = window.location.href.split("=")[1].split("&")[0];
       console.log("naver: " + token);
       let token_data = await axios({
-        url: "https://ss-dev.noe.systems/users/login",
+        url: "https://api-dev.weconnect.support/users/login",
         method: "POST",
         data: {
           access_token: token,

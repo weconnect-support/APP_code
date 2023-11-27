@@ -262,7 +262,7 @@ const Volunteer_Detail = ({ idx, volIdxData, isMaker }: propsType) => {
       </div>
       <div className="info">
         <div id="address">{volIdxData.volunteer.address}</div>
-        <div id="title">{volIdxData.volunteer.name}</div>
+        <div id="title">{volIdxData.volunteer.title}</div>
         <div id="date"></div>
         <div id="category">
           <span>카테고리.</span>

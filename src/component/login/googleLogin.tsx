@@ -24,7 +24,7 @@ const GoogleLogin_Button = (props: any) => {
     const token = res.accessToken;
     console.log("google: " + res.accessToken);
     let token_data = await axios({
-      url: "https://ss-dev.noe.systems/users/login",
+      url: "https://api-dev.weconnect.support/users/login",
       method: "POST",
       data: {
         access_token: res.accessToken,

@@ -61,7 +61,7 @@ function Main_Body() {
         }}
       >
         <div style={{ width: "70%" }}>
-          <h2>안녕하세요, 홍길동님</h2>
+          <h2>안녕하세요,</h2>
           <h2> 오늘도 따듯한 하루가 되세요</h2>
         </div>
         <Button
@@ -96,7 +96,7 @@ function Main_Body() {
         ))}
       </div>
 
-      <div className="searchCategory">
+      {/* <div className="searchCategory">
         <div id="categoryImg"></div>
         <div>
           <h3>카테고리로 찾기</h3>
@@ -141,7 +141,7 @@ function Main_Body() {
           icon={faSearch}
         ></FontAwesomeIcon>{" "}
         <p>타 지역 봉사활동 찾기</p>
-      </div>
+      </div> */}
     </Body_Main>
   );
 }

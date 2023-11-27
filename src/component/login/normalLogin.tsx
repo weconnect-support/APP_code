@@ -26,7 +26,7 @@ function NormalLogin() {
       return;
     }
     let token_data = await axios({
-      url: "https://ss-dev.noe.systems/users/login",
+      url: "https://api-dev.weconnect.support/users/login",
       method: "POST",
       data: {
         email: values.email,

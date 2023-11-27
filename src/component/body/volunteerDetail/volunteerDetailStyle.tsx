@@ -105,7 +105,7 @@ const VolDetail_Body = styled.div`
   }
   #enterArea {
     width: 80%;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     border-top-width: 0;
     border-left-width: 0;
     border-right-width: 0;

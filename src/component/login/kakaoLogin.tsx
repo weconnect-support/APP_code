@@ -11,7 +11,7 @@ export default function KakaoLogin_Button() {
     const token = data.response.access_token;
 
     let token_data = await axios({
-      url: "https://ss-dev.noe.systems/users/login",
+      url: "https://api-dev.weconnect.support/users/login",
       method: "POST",
       data: {
         access_token: token,
