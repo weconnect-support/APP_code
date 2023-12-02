@@ -6,6 +6,8 @@ const Body_List = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 0 0 5rem 0;
+  height: 100%;
+  overflow: scroll;
 `;
 
 export default Body_List;

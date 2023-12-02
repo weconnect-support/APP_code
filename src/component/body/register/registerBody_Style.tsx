@@ -6,6 +6,8 @@ const Body_Register = styled.div`
   margin-bottom: 3rem;
   flex-direction: column;
   padding: 3rem 2rem 5rem 2rem;
+  height: 100%;
+  overflow: scroll;
 
   .titleWrap {
     margin-top: 1rem;

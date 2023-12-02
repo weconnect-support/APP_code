@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 const Body_Login = styled.div`
-  background-color:#F2F2F2;
-  padding-bottom: 6rem;   
+  background-color: #f2f2f2;
+  padding-bottom: 6rem;
+  height: 100%;
+  overflow: scroll;
   .page {
     margin-left: 10%;
     margin-right: 10%;
@@ -51,20 +53,19 @@ const Body_Login = styled.div`
     color: #dadada;
   }
 
-  .signupContainer{
-
-    display:flex;
+  .signupContainer {
+    display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
   }
   .line {
     margin-left: 1rem;
     margin-right: 1rem;
     flex-grow: 1; /* 가능한 많은 공간 차지 */
-    height:1px;
-    background:#000;
+    height: 1px;
+    background: #000;
   }
-  .goToSignup{
+  .goToSignup {
     width: fit;
     background-color: transparent;
     border: none;
@@ -75,7 +76,6 @@ const Body_Login = styled.div`
     cursor: pointer;
   }
 
-  
   .bottomButton {
     width: 100%;
     height: 48px;

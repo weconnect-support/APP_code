@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 const Body_Main = styled.div`
   padding: 0 0 3.5rem 0;
+  height: 100%;
+  overflow: scroll;
 
   ::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
