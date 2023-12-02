@@ -7,6 +7,10 @@ const VolDetail_Body = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
+  height: 100%;
+  overflow: scroll;
+
+
   .header {
     width: 100%;
     margin: 1rem 0 0 0;

@@ -24,7 +24,7 @@ function List_Body() {
       },
     });
     console.log(data.data.data);
-    setList(data.data.data)
+    setList(data.data.data);
   };
   return (
     <Body_List>
