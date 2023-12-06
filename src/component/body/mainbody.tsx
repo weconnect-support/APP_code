@@ -18,8 +18,10 @@ function Main_Body() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    getVolunteerInfo();
-    checkToken();
+    let check = checkToken();
+    if (check) {
+      getVolunteerInfo();
+    }
   }, []);
 
   const checkToken = () => {
@@ -33,7 +35,9 @@ function Main_Body() {
         localStorage.removeItem("jwt-token");
         localStorage.removeItem("user-idx");
       }
+      return false;
     }
+    return true;
   };
   const getVolunteerInfo = async () => {
     let data = await axios({
@@ -65,7 +69,7 @@ function Main_Body() {
           <h2> 오늘도 따듯한 하루가 되세요</h2>
         </div>
         <Button
-          icon={<HeartFilled style={{color:"#ff4471"}} />}
+          icon={<HeartFilled style={{ color: "#ff4471" }} />}
           onClick={() => navigate("/volunteer/wishList")}
         >
           찜목록
