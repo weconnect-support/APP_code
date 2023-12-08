@@ -13,6 +13,7 @@ import VolDetail from "./layout/volunteerDetail";
 import VolunteerEdit from "./layout/volunteerEdit";
 import WishList from "./layout/wishList";
 import GlobalStyle from './App_style';
+import Calendar from "./layout/calendar";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/volunteer/:idx" element={<VolDetail />}></Route>
         <Route path="/volunteer/:idx/edit" element={<VolunteerEdit />}></Route>
         <Route path="/volunteer/wishList" element={<WishList/>}></Route>
+        <Route path="/calendar" element={<Calendar/>}></Route>
       </Routes>
     </Stack>
   );
