@@ -14,7 +14,7 @@ export default function NaverLogin_Button() {
   function initNaverLogin() {
     const naverLogin = new window.naver.LoginWithNaverId({
       clientId: "pbsnA3r3fC8AmYvErUfW",
-      callbackUrl: `https://ssangsang.weconnect.support/naver`,
+      callbackUrl: `http://localhost:3000/naver`,
       isPopup: false,
       loginButton: {
         color: "green",
